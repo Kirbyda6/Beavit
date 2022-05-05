@@ -6,3 +6,15 @@ table, td {
 #icon:hover {
   cursor: pointer;
 }
+
+.tooltip .tooltext {
+  width: 120px;
+  visibility: hidden;
+  text-align: center;
+  position: absolute;
+  z-index: 1;
+}
+
+.tooltip:hover .tooltext{
+  visibility: visible;
+}
