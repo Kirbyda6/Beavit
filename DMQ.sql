@@ -35,6 +35,11 @@ WHERE UserID = "$UserIDFromForm";
     -- Delete a User
 DELETE FROM Users WHERE UserID = $UserSelectionFromList;
 
+    -- Search for a User
+SELECT Username AS "Username", JoinDate AS "Join Date", ThumbsUpCt AS "Thumbs Up Count", ThumbsDwnCt AS "Thumbs Down Count" 
+FROM Users
+WHERE Users.Username = "$UserInputHere"
+
 ---------------------------------------------------------------------------------------------------------------------------------------------
 -- Posts Queries:
 
