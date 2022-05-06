@@ -7,7 +7,10 @@ function Users() {
     return(
         <div>
             <button onClick={() => navigate('/addUser')}>Add User</button>
-            <Link to='/'>Homepage</Link>
+            <Link to='/'>Homepage</Link><br></br>
+            <label for='usrname'>Search For Username: </label>
+            <input type='search' name='usrname'></input>
+            <button>Search</button>
             <table id='userTable'>
                 <th>Username</th><th>Join Date</th><th>Thumbs Up Count</th><th>Thumbs Down Count</th>
                 <tr><td>Billy</td><td>2017-06-15</td><td>853</td><td>25</td><td><MdDeleteForever id="icon"/></td></tr>

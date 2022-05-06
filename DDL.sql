@@ -23,7 +23,7 @@ CREATE OR REPLACE TABLE Community_User_Base (
     ModeratorStatus BOOLEAN NOT NULL DEFAULT False,
     PRIMARY KEY (Users_UserID, Communities_CommunityID),
     FOREIGN KEY (Users_UserID) REFERENCES Users(UserID) ON DELETE CASCADE,
-    FOREIGN KEY (Communities_CommunityID) REFERENCES Communities(CommunityID)
+    FOREIGN KEY (Communities_CommunityID) REFERENCES Communities(CommunityID) ON DELETE CASCADE
 );
 
 CREATE OR REPLACE TABLE Posts (
@@ -36,7 +36,7 @@ CREATE OR REPLACE TABLE Posts (
     Communities_CommunityID INT NOT NULL,
     PRIMARY KEY (PostID),
     FOREIGN KEY (OP_UserID) REFERENCES Users(UserID) ON DELETE CASCADE,
-    FOREIGN KEY (Communities_CommunityID) REFERENCES Communities(CommunityID)
+    FOREIGN KEY (Communities_CommunityID) REFERENCES Communities(CommunityID) ON DELETE CASCADE
 );
 
 CREATE OR REPLACE TABLE Comments (
@@ -50,8 +50,8 @@ CREATE OR REPLACE TABLE Comments (
     Parent_Comment_CommentID INT,
     PRIMARY KEY (CommentID),
     FOREIGN KEY (Commenter_UserID) REFERENCES Users(UserID) ON DELETE CASCADE,
-    FOREIGN KEY (Parent_Post_PostID) REFERENCES Posts(PostID),
-    FOREIGN KEY (Parent_Comment_CommentID) REFERENCES Comments(CommentID)
+    FOREIGN KEY (Parent_Post_PostID) REFERENCES Posts(PostID) ON DELETE CASCADE,
+    FOREIGN KEY (Parent_Comment_CommentID) REFERENCES Comments(CommentID) ON DELETE CASCADE
 );
 
 INSERT INTO Users (UserID, Username, JoinDate, ThumbsUpCt, ThumbsDwnCt) VALUES

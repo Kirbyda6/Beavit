@@ -1,6 +1,7 @@
 import React from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { MdOutlineEditNote, MdDeleteForever } from "react-icons/md";
+import { HiOutlineUserRemove } from "react-icons/hi";
 
 function Comments() {
     const navigate = useNavigate()
@@ -26,6 +27,10 @@ function Comments() {
                     <td>NULL</td>
                     <td><MdOutlineEditNote id="icon" onClick={() => navigate('/editComment')}/></td>
                     <td><MdDeleteForever id="icon"/></td>
+                    <td className="tooltip">
+                        <HiOutlineUserRemove id="icon"/>
+                        <span className="tooltext">Set User To NULL</span>
+                    </td>
                 </tr>
                 <tr>
                     <td>Bob</td>
@@ -37,6 +42,10 @@ function Comments() {
                     <td>NULL</td>
                     <td><MdOutlineEditNote id="icon" onClick={() => navigate('/editComment')}/></td>
                     <td><MdDeleteForever id="icon"/></td>
+                    <td className="tooltip">
+                        <HiOutlineUserRemove id="icon"/>
+                        <span className="tooltext">Set User To NULL</span>
+                    </td>
                 </tr>
                 <tr>
                     <td>Jill</td>
@@ -48,6 +57,10 @@ function Comments() {
                     <td>NULL</td>
                     <td><MdOutlineEditNote id="icon" onClick={() => navigate('/editComment')}/></td>
                     <td><MdDeleteForever id="icon"/></td>
+                    <td className="tooltip">
+                        <HiOutlineUserRemove id="icon"/>
+                        <span className="tooltext">Set User To NULL</span>
+                    </td>
                 </tr>
                 <tr>
                     <td>Jane</td>
@@ -59,6 +72,10 @@ function Comments() {
                     <td>Yes! I thought it was a lot better than the last Marvel movie.</td>
                     <td><MdOutlineEditNote id="icon" onClick={() => navigate('/editComment')}/></td>
                     <td><MdDeleteForever id="icon"/></td>
+                    <td className="tooltip">
+                        <HiOutlineUserRemove id="icon"/>
+                        <span className="tooltext">Set User To NULL</span>
+                    </td>
                 </tr>
                 <tr>
                     <td>Billy</td>
@@ -70,6 +87,10 @@ function Comments() {
                     <td>NULL</td>
                     <td><MdOutlineEditNote id="icon" onClick={() => navigate('/editComment')}/></td>
                     <td><MdDeleteForever id="icon"/></td>
+                    <td className="tooltip">
+                        <HiOutlineUserRemove id="icon"/>
+                        <span className="tooltext">Set User To NULL</span>
+                    </td>
                 </tr>
             </table>
         </div>
