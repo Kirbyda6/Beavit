@@ -115,10 +115,10 @@ INSERT INTO Comments (CommentID, ThumbsUpCt, ThumbsDwnCt, DateMade, CommentStr, 
     34,
     2,
     '2021-11-10',
-    "Me too! I'm looking forward to the sequal.",
+    "Me too! I'm looking forward to the sequel.",
     (SELECT UserID FROM Users WHERE Username='Jane'),
     (SELECT PostID FROM Posts WHERE PostTitle='Should I see the latest Marvel movie?'),
-    2
+    (SELECT CommentID FROM Comments A WHERE CommentStr="Yes! I thought it was a lot better than the last Marvel movie.")
 ),
 (
     5,

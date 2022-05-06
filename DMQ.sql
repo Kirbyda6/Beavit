@@ -35,6 +35,11 @@ WHERE UserID = "$UserIDFromForm";
     -- Delete a User
 DELETE FROM Users WHERE UserID = $UserSelectionFromList;
 
+    -- Search for a User
+SELECT Username AS "Username", JoinDate AS "Join Date", ThumbsUpCt AS "Thumbs Up Count", ThumbsDwnCt AS "Thumbs Down Count" 
+FROM Users
+WHERE Users.Username = "$UserInputHere"
+
 ---------------------------------------------------------------------------------------------------------------------------------------------
 -- Posts Queries:
 
@@ -89,13 +94,15 @@ DELETE FROM  Communities WHERE CommunityName = $UserSelectionFromList;
 INSERT INTO Comments (CommentID, ThumbsUpCt, ThumbsDwnCt, DateMade, CommentStr, Commenter_UserID, Parent_Post_PostID, Parent_Comment_CommentID)
 VALUES ($CommentID, $ThumbsUpCt, $ThumbsDwnCt, $DateMade, $CommentStr, $Commenter_UserID, $Parent_Post_PostID, $Parent_Comment_CommentID);
 
-    -- Display Comments Page Criteria (missing how to grab parent comment )
-SELECT Users.Username AS "Made By", Comments.DateMade AS "Date Made", 
-    Comments.ThumbsUpCt AS "Thumbs Up Count", Comments.ThumbsDwnCt AS "Thumbs Down Count",
-    Comments.CommentStr AS "Comment", Posts.PostTitle AS "Parent Post"
-FROM Comments
-JOIN Users ON Comments.Commenter_UserID = Users.UserID
-JOIN Posts ON Comments.Parent_Post_PostID = Posts.PostID;
+    -- Display Comments Page Criteria
+SELECT Users.Username AS "Made By", child.DateMade AS "Date Made", 
+	child.ThumbsUpCt AS "Thumbs Up Count", child.ThumbsDwnCt AS "Thumbs Down Count",
+    child.CommentStr AS "Comment", Posts.PostTitle AS "Parent Post", 
+    parent.CommentStr AS "Parent Comment"
+FROM Comments child
+LEFT JOIN Comments parent ON child.Parent_Comment_CommentID = parent.CommentID -- --> Uses Self Join to relate the CommentStr of the comment the child comment is responding to based on commentID
+JOIN Users ON child.Commenter_UserID = Users.UserID
+JOIN Posts ON child.Parent_Post_PostID = Posts.PostID;
 
     -- Update a Comment (Two Parts)
         -- Get specific comment's info and display it
