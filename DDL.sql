@@ -3,7 +3,7 @@ SET AUTOCOMMIT = 0;
 
 CREATE OR REPLACE TABLE Users (
     UserID INT NOT NULL AUTO_INCREMENT,
-    Username VARCHAR(20) NOT NULL,
+    Username VARCHAR(20) NOT NULL UNIQUE,
     JoinDate DATE NOT NULL,
     ThumbsUpCt INT NOT NULL,
     ThumbsDwnCt INT NOT NULL,
@@ -12,7 +12,7 @@ CREATE OR REPLACE TABLE Users (
 
 CREATE OR REPLACE TABLE Communities (
     CommunityID INT NOT NULL AUTO_INCREMENT,
-    CommunityName VARCHAR(20) NOT NULL,
+    CommunityName VARCHAR(20) NOT NULL UNIQUE,
     MemberCt INT NOT NULL,
     PRIMARY KEY (CommunityID)
 );
