@@ -108,7 +108,7 @@ INSERT INTO Comments (CommentID, ThumbsUpCt, ThumbsDwnCt, DateMade, CommentStr, 
     "I really liked CS 361 and recommend it for Winter quarter.",
     (SELECT UserID FROM Users WHERE Username='Jill'),
     (SELECT PostID FROM Posts WHERE PostTitle='What class should I take next quarter?'),
-    (SELECT CommentID FROM Comments A WHERE CommentStr="I think you should take CS 271!")
+    NULL
 ),
 (
     4,

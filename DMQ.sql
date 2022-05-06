@@ -97,8 +97,8 @@ VALUES ($CommentID, $ThumbsUpCt, $ThumbsDwnCt, $DateMade, $CommentStr, $Commente
     -- Display Comments Page Criteria
 SELECT Users.Username AS "Made By", child.DateMade AS "Date Made", 
 	child.ThumbsUpCt AS "Thumbs Up Count", child.ThumbsDwnCt AS "Thumbs Down Count",
-    child.CommentStr AS "Comment", child.Parent_Comment_CommentID, 
-    Posts.PostTitle AS "Parent Post", parent.CommentStr AS "Parent Comment"
+    child.CommentStr AS "Comment", Posts.PostTitle AS "Parent Post", 
+    parent.CommentStr AS "Parent Comment"
 FROM Comments child
 LEFT JOIN Comments parent ON child.Parent_Comment_CommentID = parent.CommentID -- --> Uses Self Join to relate the CommentStr of the comment the child comment is responding to based on commentID
 JOIN Users ON child.Commenter_UserID = Users.UserID
