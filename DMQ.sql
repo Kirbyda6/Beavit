@@ -22,7 +22,7 @@ INSERT INTO Users (Username, JoinDate, ThumbsUpCt, ThumbsDwnCt)
 VALUES ($Username, $JoinDate, ThumbsUpCt, $ThumbsDwnCt);
     
     -- Display all users
-SELECT Username, JoinDate AS "Join Date", ThumbsUpCt AS "Thumbs Up Count", ThumbsDwnCt AS "Thumbs Down Count" FROM Users;
+SELECT Username, JoinDate AS "Join Date", ThumbsUpCt AS "Thumbs Up", ThumbsDwnCt AS "Thumbs Down" FROM Users;
 
     -- Update a User (Two Parts)
         -- Get specific user's info and display it
@@ -36,7 +36,7 @@ WHERE UserID = "$UserIDFromForm";
 DELETE FROM Users WHERE UserID = $UserSelectionFromList;
 
     -- Search for a User
-SELECT Username AS "Username", JoinDate AS "Join Date", ThumbsUpCt AS "Thumbs Up Count", ThumbsDwnCt AS "Thumbs Down Count" 
+SELECT Username AS "Username", JoinDate AS "Join Date", ThumbsUpCt AS "Thumbs Up", ThumbsDwnCt AS "Thumbs Down" 
 FROM Users
 WHERE Users.Username = "$UserInputHere"
 
@@ -49,7 +49,7 @@ VALUES ($OP_UserID, $PostTitle, $ThumbsUpCt, $ThumbsDwnCt, $DatePosted, $Communi
     
     -- Display posts (needs to get community name via CommunityID FK from Communities Table and Username from Users Table)
 SELECT Users.Username AS "Poster", Posts.PostTitle AS "Post Title", 
-    Posts.ThumbsUpCt AS "Thumbs Up Count", Posts.ThumbsDwnCt AS "Thumbs Down Count", 
+    Posts.ThumbsUpCt AS "Thumbs Up", Posts.ThumbsDwnCt AS "Thumbs Down", 
     Posts.DatePosted AS "Date Posted", Communities.CommunityName AS "Community" 
 FROM Posts
 JOIN Users ON Posts.OP_UserID = Users.UserID
@@ -96,7 +96,7 @@ VALUES ($CommentID, $ThumbsUpCt, $ThumbsDwnCt, $DateMade, $CommentStr, $Commente
 
     -- Display Comments Page Criteria
 SELECT Users.Username AS "Made By", child.DateMade AS "Date Made", 
-	child.ThumbsUpCt AS "Thumbs Up Count", child.ThumbsDwnCt AS "Thumbs Down Count",
+	child.ThumbsUpCt AS "Thumbs Up", child.ThumbsDwnCt AS "Thumbs Down",
     child.CommentStr AS "Comment", Posts.PostTitle AS "Parent Post", 
     parent.CommentStr AS "Parent Comment"
 FROM Comments child
@@ -114,7 +114,11 @@ UPDATE Comments SET ThumbsUpCt = "$ThumbsUpInput", ThumbsDwnCt = "ThumbsDwnInput
     Parent_Comment_CommentID = "$UsersParentCommentIDInput"
 WHERE CommentID = $UserSelectionFromDropDownThatProvidesListOfCommentIDs;
 
-   -- Delete a Comment
+    -- Set Parent Comment to Null
+UPDATE Comments SET Parent_Comment_CommentID = NULL
+WHERE CommentID = $UserSelectionFromButton;
+
+    -- Delete a Comment
 DELETE FROM Comments WHERE CommentID = $UserSelectionThatProvidesCommenterUsernameAndCommentStr;
 
 ---------------------------------------------------------------------------------------------------------------------------------------------

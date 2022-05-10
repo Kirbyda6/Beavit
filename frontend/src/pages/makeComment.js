@@ -8,17 +8,17 @@ function MakeComment() {
             <Link to='/comments'>Cancel</Link>
             <fieldset>
                 <legend>Make Comment</legend>
-                <label for="Made By">Made By: </label>
+                <label htmlFor="Made By">Made By: </label>
                 <input type='text' name="Made By"/><br></br>
-                <label for="Comment">Comment: </label>
+                <label htmlFor="Comment">Comment: </label>
                 <input type='text' name="Comment"/><br></br>
-                <label for="Post">Parent Post: </label>
+                <label htmlFor="Post">Parent Post: </label>
                 <select name="Post">
                     <option value={1111}>What class should I take next quarter?</option>
                     <option value={2222}>Check out my cute dog!</option>
                     <option value={3333}>Should I see the latest Marvel movie?</option>
                 </select><br></br>
-                <label for="Reply">Replying to: </label>
+                <label htmlFor="Reply">Replying to: </label>
                 <select name="Reply">
                     <option value={null}>NULL</option>
                     <option value={1}>I think you should take CS 271!</option>

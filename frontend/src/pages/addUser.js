@@ -8,7 +8,7 @@ function Users() {
             <Link to='/users'>Cancel</Link>
             <fieldset>
                 <legend>New User</legend>
-                <label for="username">Username: </label>
+                <label htmlFor="username">Username: </label>
                 <input type='text' name="username"/>
                 <button onClick={() => navigate('/users')}>Add</button>
             </fieldset>

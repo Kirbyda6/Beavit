@@ -8,23 +8,23 @@ function EditComment() {
             <Link to='/comments'>Cancel</Link>
             <fieldset>
                 <legend>Edit Comment</legend>
-                <label for="Made By">Made By: </label>
-                <input type='text' name="Made By" value='Billy'/><br></br>
-                <label for="Date Made">Date Made: </label>
-                <input type='datetime-local' name="Date Made" value='2021-11-07T00:00'/><br></br>
-                <label for="Thumbs up">Thumbs Up Count: </label>
-                <input type='text' name="Thumbs up" value={20}/><br></br>
-                <label for="Thumbs down">Thumbs Down Count: </label>
-                <input type='text' name="Thumbs down" value={3}/><br></br>
-                <label for="Comment">Comment: </label>
-                <input type='text' name="Comment" value='I think you should take CS 271!'/><br></br>
-                <label for="Post">Parent Post: </label>
+                <label htmlFor="Made By">Made By: </label>
+                <input type='text' name="Made By" defaultValue='Billy'/><br></br>
+                <label htmlFor="Date Made">Date Made: </label>
+                <input type='datetime-local' name="Date Made" defaultValue='2021-11-07T00:00'/><br></br>
+                <label htmlFor="Thumbs up">Thumbs Up Count: </label>
+                <input type='number' name="Thumbs up" defaultValue={20}/><br></br>
+                <label htmlFor="Thumbs down">Thumbs Down Count: </label>
+                <input type='number' name="Thumbs down" defaultValue={3}/><br></br>
+                <label htmlFor="Comment">Comment: </label>
+                <input type='text' name="Comment" defaultValue='I think you should take CS 271!'/><br></br>
+                <label htmlFor="Post">Parent Post: </label>
                 <select name="Post">
                     <option value={1111}>What class should I take next quarter?</option>
                     <option value={2222}>Check out my cute dog!</option>
                     <option value={3333}>Should I see the latest Marvel movie?</option>
                 </select><br></br>
-                <label for="Reply">Replying to: </label>
+                <label htmlFor="Reply">Replying to: </label>
                 <select name="Reply">
                     <option value={null}>NULL</option>
                     <option value={1}>I think you should take CS 271!</option>

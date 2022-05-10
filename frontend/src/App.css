@@ -1,3 +1,7 @@
+#app {
+  font-size: 20px;
+}
+
 table, td {
   border: 1px solid;
   border-color: black;
@@ -17,4 +21,19 @@ table, td {
 
 .tooltip:hover .tooltext{
   visibility: visible;
+}
+
+.nav-bar {
+  display: flex;
+  height: 50px;
+  align-items: center;
+  background-color: #EEB76B;
+}
+
+.nav-bar *{
+  margin: 0px 10px 0px 10px;
+}
+
+#current-page {
+  color: #E2703A;
 }
