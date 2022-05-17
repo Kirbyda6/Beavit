@@ -8,11 +8,11 @@ function AddCommUsr() {
             <Link to='/communityUsers'>Cancel</Link>
             <fieldset>
                 <legend>Add A User To A Community</legend>
-                <label for='User'>User: </label>
-                <input type='text' name='User'></input><br></br>
-                <label for='Community'>Community: </label>
-                <input type='text' name='Community'></input><br></br>
-                <label for='Mod'>Moderator Status: </label>
+                <label htmlFor='User'>User: </label>
+                <input type='text' name='User' className="txtbar"></input><br></br>
+                <label htmlFor='Community'>Community: </label>
+                <input type='text' name='Community' className="txtbar"></input><br></br>
+                <label htmlFor='Mod'>Moderator Status: </label>
                 <select name='Mod'>
                     <option value={0}>0</option>
                     <option value={1}>1</option>

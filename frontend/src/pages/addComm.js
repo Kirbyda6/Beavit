@@ -8,8 +8,8 @@ function AddComm() {
             <Link to='/communities'>Cancel</Link>
             <fieldset>
                 <legend>Add A Community</legend>
-                <label for='community'>Community Name: </label>
-                <input type='text' name="community"/>
+                <label htmlFor='community'>Community Name: </label>
+                <input type='text' name="community" className="txtbar"/>
                 <button onClick={() => navigate('/communities')}>Add</button>
             </fieldset>
         </div>

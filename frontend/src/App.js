@@ -22,7 +22,7 @@ import AddCommUsr from './pages/AddUsrCom';
 
 function App() {
   return (
-    <div id='frontpage'>
+    <div id='app'>
       <Router>
         <Routes>
           <Route path="/" element={<Homepage/>}/>

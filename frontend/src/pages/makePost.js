@@ -8,12 +8,12 @@ function MakePost() {
             <Link to='/posts'>Cancel</Link>
             <fieldset>
                 <legend>Make Post</legend>
-                <label for="Poster">Poster: </label>
-                <input type='text' name="Poster"/><br></br>
-                <label for="Title">Title: </label>
-                <input type='text' name="Title"/><br></br>
-                <label for="Community">Community: </label>
-                <input type='text' name="Community"/><br></br>
+                <label htmlFor="Poster">Poster: </label>
+                <input type='text' name="Poster" className="txtbar"/><br></br>
+                <label htmlFor="Title">Title: </label>
+                <input type='text' name="Title" className="txtbar"/><br></br>
+                <label htmlFor="Community">Community: </label>
+                <input type='text' name="Community" className="txtbar"/><br></br>
                 <button onClick={() => navigate('/posts')}>Post</button>
             </fieldset>
         </div>

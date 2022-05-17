@@ -6,14 +6,26 @@ function Communities() {
     const navigate = useNavigate();
     return(
         <div>
-            <button onClick={() => navigate('/addComm')}>Add Community</button>
-            <Link to='/'>Homepage</Link>
-            <table id='communityTable'>
-                <th>Community Name</th><th>Member Count</th>
-                <tr><td>OSU</td><td>159</td><td><MdDeleteForever id="icon"/></td></tr>
-                <tr><td>Pets</td><td>20000</td><td><MdDeleteForever id="icon"/></td></tr>
-                <tr><td>Movies</td><td>50000</td><td><MdDeleteForever id="icon"/></td></tr>
-            </table>
+            <span className="nav-bar">
+                <h1 id='beavit' onClick={() => navigate('/')}>Beavit</h1>
+                <Link to='/users'> Users </Link>
+                <Link to='/posts'> Posts </Link>
+                <Link to='/comments'> Comments </Link>
+                <Link to='/communities' id="current-page"> Communities </Link>
+                <Link to='/communityUsers'> Community Users </Link>
+            </span>
+            <div className="content">
+                <table>
+                    <thead><tr><th>Community Name</th><th>Member Count</th></tr></thead>
+                    <tbody>
+                        <tr><td>OSU</td><td>159</td><td><MdDeleteForever id="icon"/></td></tr>
+                        <tr><td>Pets</td><td>20000</td><td><MdDeleteForever id="icon"/></td></tr>
+                        <tr><td>Movies</td><td>50000</td><td><MdDeleteForever id="icon"/></td></tr>
+                    </tbody>
+                </table>
+                <button onClick={() => navigate('/addComm')}>Add A Community</button>
+            </div>
+            
         </div>
     );
 }
