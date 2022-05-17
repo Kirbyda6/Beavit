@@ -1,6 +1,6 @@
 const express = require('express')
 const app = express()
-const PORT = 3000;
+const PORT = 8056;
 
 const mysql = require('mysql')
 
@@ -11,6 +11,8 @@ const pool = mysql.createPool({
     password        : '7984',
     database        : 'cs340_lewitren'
 })
+
+app.get("/", (req, res) => res.send("Testing Nodemon"))
 
 app.listen(PORT, () => {
     console.log(`Server listening on port ${PORT}...`);
