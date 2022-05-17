@@ -9,7 +9,7 @@ function AddComm() {
             <fieldset>
                 <legend>Add A Community</legend>
                 <label htmlFor='community'>Community Name: </label>
-                <input type='text' name="community"/>
+                <input type='text' name="community" className="txtbar"/>
                 <button onClick={() => navigate('/communities')}>Add</button>
             </fieldset>
         </div>

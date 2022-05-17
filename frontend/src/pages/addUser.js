@@ -9,7 +9,7 @@ function Users() {
             <fieldset>
                 <legend>New User</legend>
                 <label htmlFor="username">Username: </label>
-                <input type='text' name="username"/>
+                <input type='text' name="username" className="txtbar"/>
                 <button onClick={() => navigate('/users')}>Add</button>
             </fieldset>
             

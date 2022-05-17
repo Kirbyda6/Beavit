@@ -9,15 +9,15 @@ function EditComment() {
             <fieldset>
                 <legend>Edit Comment</legend>
                 <label htmlFor="Made By">Made By: </label>
-                <input type='text' name="Made By" defaultValue='Billy'/><br></br>
+                <input type='text' name="Made By" defaultValue='Billy' className="txtbar"/><br></br>
                 <label htmlFor="Date Made">Date Made: </label>
-                <input type='datetime-local' name="Date Made" defaultValue='2021-11-07T00:00'/><br></br>
+                <input type='datetime-local' name="Date Made" defaultValue='2021-11-07T00:00' className="txtbar"/><br></br>
                 <label htmlFor="Thumbs up">Thumbs Up Count: </label>
-                <input type='number' name="Thumbs up" defaultValue={20}/><br></br>
+                <input type='number' name="Thumbs up" defaultValue={20} className="txtbar"/><br></br>
                 <label htmlFor="Thumbs down">Thumbs Down Count: </label>
-                <input type='number' name="Thumbs down" defaultValue={3}/><br></br>
+                <input type='number' name="Thumbs down" defaultValue={3} className="txtbar"/><br></br>
                 <label htmlFor="Comment">Comment: </label>
-                <input type='text' name="Comment" defaultValue='I think you should take CS 271!'/><br></br>
+                <input type='text' name="Comment" defaultValue='I think you should take CS 271!' className="txtbar"/><br></br>
                 <label htmlFor="Post">Parent Post: </label>
                 <select name="Post">
                     <option value={1111}>What class should I take next quarter?</option>

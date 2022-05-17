@@ -9,9 +9,9 @@ function AddCommUsr() {
             <fieldset>
                 <legend>Add A User To A Community</legend>
                 <label htmlFor='User'>User: </label>
-                <input type='text' name='User'></input><br></br>
+                <input type='text' name='User' className="txtbar"></input><br></br>
                 <label htmlFor='Community'>Community: </label>
-                <input type='text' name='Community'></input><br></br>
+                <input type='text' name='Community' className="txtbar"></input><br></br>
                 <label htmlFor='Mod'>Moderator Status: </label>
                 <select name='Mod'>
                     <option value={0}>0</option>

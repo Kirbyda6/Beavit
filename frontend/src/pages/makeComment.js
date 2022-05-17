@@ -9,9 +9,9 @@ function MakeComment() {
             <fieldset>
                 <legend>Make Comment</legend>
                 <label htmlFor="Made By">Made By: </label>
-                <input type='text' name="Made By"/><br></br>
+                <input type='text' name="Made By" className="txtbar"/><br></br>
                 <label htmlFor="Comment">Comment: </label>
-                <input type='text' name="Comment"/><br></br>
+                <input type='text' name="Comment" className="txtbar"/><br></br>
                 <label htmlFor="Post">Parent Post: </label>
                 <select name="Post">
                     <option value={1111}>What class should I take next quarter?</option>
