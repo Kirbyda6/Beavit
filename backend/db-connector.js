@@ -1,7 +1,3 @@
-const express = require('express')
-const app = express()
-const PORT = 8056;
-
 const mysql = require('mysql')
 
 const pool = mysql.createPool({
@@ -11,11 +7,5 @@ const pool = mysql.createPool({
     password        : '7984',
     database        : 'cs340_lewitren'
 })
-
-app.get("/", (req, res) => res.send("Testing Nodemon"))
-
-app.listen(PORT, () => {
-    console.log(`Server listening on port ${PORT}...`);
-});
 
 module.exports.pool = pool;
