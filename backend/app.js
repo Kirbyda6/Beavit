@@ -6,6 +6,16 @@ const db = require('./db-connector');
 
 app.use(express.json());
 
+app.use(function(req, res, next) {
+    res.header("Access-Control-Allow-Origin", "*");
+    res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+    next();
+  });
+
+//General Route Test
+app.get('/', function(req, res) {
+    res.send("Working")
+});
 
 //User Routes
 app.post("/addUser", (req, res) => {
@@ -27,9 +37,21 @@ app.post("/addUser", (req, res) => {
 });
 
 app.get("/users", (req, res) => {
-    db.pool.query('SELECT Username, JoinDate AS "Join Date", ThumbsUpCt AS "Thumbs Up", ThumbsDwnCt AS "Thumbs Down" FROM Users;')
+    query1 = 'SELECT Username, JoinDate, ThumbsUpCt, ThumbsDwnCt FROM Users;';
+    
+    db.pool.query(query1, function (err, results, fields){
+        res.send(JSON.stringify(results));
+    });
 })
 
+//Post Routes
+app.get('/posts', function(req, res) {
+    query1 = 'SELECT * FROM Posts;';
+
+    db.pool.query(query1, function (err, results, fields){
+        res.send(JSON.stringify(results));
+    });
+});
 
 
 
