@@ -17,8 +17,8 @@ function Users() {
             userThumbsUp: userThumbsUp,
             userThumbsDown: userThumbsDown,
         }).then(() => {
-            console.log ("User added")
-        }); navigate('/users')
+            console.log ("User added") // for testing
+        }); navigate('/users') // sends user back to the Users page after addition
     };
 
     return(

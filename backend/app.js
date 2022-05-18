@@ -5,9 +5,9 @@ const PORT = 8056;
 const db = require('./db-connector');
 
 app.use(express.json());
-//Routes
 
 
+//User Routes
 app.post("/addUser", (req, res) => {
     const username = req.body.username;
     const userJoinDate = req.body.userJoinDate;
@@ -26,7 +26,9 @@ app.post("/addUser", (req, res) => {
         );
 });
 
-
+app.get("/users", (req, res) => {
+    db.pool.query('SELECT Username, JoinDate AS "Join Date", ThumbsUpCt AS "Thumbs Up", ThumbsDwnCt AS "Thumbs Down" FROM Users;')
+})
 
 
 
