@@ -9,7 +9,17 @@ function Users() {
             <fieldset>
                 <legend>New User</legend>
                 <label htmlFor="username">Username: </label>
-                <input type='text' name="username" className="txtbar"/>
+                <input type='text' name="username" className="txtbar"/><br></br>
+
+                <label htmlFor="userJoinDate">Join Date: </label>
+                <input type='date' name="userJoinDate" className="txtbar"/><br></br>
+
+                <label htmlFor="userThumbsUp">User's Thumbs Up Total: </label>
+                <input type='number' name="userThumbsUp" className="txtbar"/><br></br>
+
+                <label htmlFor="userThumbsDown">User's Thumbs Down Total: </label>
+                <input type='number' name="userThumbsDown" className="txtbar"/><br></br>
+
                 <button onClick={() => navigate('/users')}>Add</button>
             </fieldset>
             

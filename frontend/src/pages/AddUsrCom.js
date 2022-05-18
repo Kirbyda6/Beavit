@@ -14,8 +14,8 @@ function AddCommUsr() {
                 <input type='text' name='Community' className="txtbar"></input><br></br>
                 <label htmlFor='Mod'>Moderator Status: </label>
                 <select name='Mod'>
-                    <option value={0}>0</option>
-                    <option value={1}>1</option>
+                    <option value={0}>Is a Moderator of this community</option>
+                    <option value={1}>Not a Moderator of this community</option>
                 </select><br></br>
                 <button onClick={() => navigate('/communityUsers')}>Add</button>
             </fieldset>
