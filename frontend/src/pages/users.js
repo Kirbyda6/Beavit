@@ -14,11 +14,13 @@ function Users() {
                 <Link to='/communities'> Communities </Link>
                 <Link to='/communityUsers'> Community Users </Link>
             </span>
+
             <div className="content">
                 <div className='search'>
                     <input type='text' name='usrname' className="txtbar" placeholder="Search For Username"></input>
                     <button>Search</button>
                 </div>
+
                 <table>
                     <thead><tr><th>Username</th><th>Join Date</th><th>Thumbs Up</th><th>Thumbs Down</th></tr></thead>
                     <tbody>
@@ -28,6 +30,7 @@ function Users() {
                         <tr><td>Jane</td><td>2018-06-21</td><td>912</td><td>9</td><td><MdDeleteForever id="icon"/></td></tr>
                     </tbody>
                 </table>
+                
                 <button onClick={() => navigate('/addUser')}>Add A User</button>
             </div>
         </div>
