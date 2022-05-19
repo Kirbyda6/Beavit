@@ -37,12 +37,29 @@ app.post("/addUser", (req, res) => {
 });
 
 app.get("/users", (req, res) => {
-    query1 = 'SELECT Username, JoinDate, ThumbsUpCt, ThumbsDwnCt FROM Users;';
-    
-    db.pool.query(query1, function (err, results, fields){
-        res.send(JSON.stringify(results));
+    seeUsersQuery = 'SELECT Username, JoinDate, ThumbsUpCt, ThumbsDwnCt FROM Users;';
+    // seeUsersQuery = "SELECT * FROM Users;"  --> TESTING PURPOSES
+    db.pool.query(seeUsersQuery , function (err, result){
+        if(err) {
+            console.log(err)
+        } else {
+        //res.send(JSON.stringify(results))--> NEEDED IF WE DON'T USE AXIOS
+        res.send(result);
+        }
     });
 })
+
+app.delete("/users", (req, res) => {
+    const username = req.body.username;
+    const userJoinDate = req.body.userJoinDate;
+    const userThumbsUp = req.body.userThumbsUp;
+    const userThumbsDown = req.body.userThumbsDown;
+
+    deleteUserQuery = 'DELETE '
+})
+
+
+
 
 //Post Routes
 app.get('/posts', function(req, res) {
@@ -52,8 +69,6 @@ app.get('/posts', function(req, res) {
         res.send(JSON.stringify(results));
     });
 });
-
-
 
 //Listener
 app.listen(PORT, () => {

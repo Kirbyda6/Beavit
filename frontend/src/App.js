@@ -18,9 +18,10 @@ import MakeComment from './pages/makeComment';
 import EditComment from './pages/editComment';
 import MakePost from './pages/makePost';
 import AddCommUsr from './pages/AddUsrCom';
+//import Axios from 'axios';
 
 function App() {
-    const [users, setUsers] = useState([]);
+    // const [users, setUsers] = useState([]); NOT CURRENTLY NEEDED AS DATA LOADS THROUGH Users.JS
     const [posts, setPosts] = useState([]);
     const [comments, setComments] = useState([]);
     const [comms, setComms] = useState([]);
@@ -37,26 +38,36 @@ function App() {
         .then(res => {return res.json()})
         .then(result => {setPosts(result)})
     }
-
-    const loadUsers = async () => {
-        await fetch('http://flip2.engr.oregonstate.edu:8056/users', {
-            method: 'GET',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            // mode: 'no-cors'
-        })
-        .then(res => {return res.json()})
-        .then(result => {setUsers(result)})
-    }
-
+    
     useEffect(() => {
         loadPosts();
     }, []);
+    
+    //LINES BELOW ARE LOADING USER DATA VIA FETCH AND/OR AXIOS. CURRENTLY LOADS DATA IN Users.JS INSTEAD
+    // const loadUsers = async () => {
+    //     await fetch('http://flip2.engr.oregonstate.edu:8056/users', {
+    //         method: 'GET',
+    //         headers: {
+    //             'Content-Type': 'application/json'
+    //         },
+    //         // mode: 'no-cors'
+    //     })
+    //     .then(res => {return res.json()})
+    //     .then(result => {setUsers(result)})
+    // }
 
-    useEffect(() => {
-        loadUsers();
-    }, []);
+
+    //LINES BELOW ARE FOR IF WE WANT THIS DATA TO BE LOADED THROUGH THIS FILE INSTEAD OF Users.JS
+    // const loadUsers = () => {
+    //     Axios.get("http://flip2.engr.oregonstate.edu:8056/users").then((response) => {
+    //         (console.log(response))
+    //         setUsers(response.data)
+    //     })
+    // };
+
+    // useEffect(() => {
+    //     loadUsers();
+    // }, []);
 
     return (
         <div id='app'>
@@ -66,7 +77,7 @@ function App() {
                     <Route path="/posts" element={<Posts posts={posts} />} />
                     <Route path="/editPost" element={<EditPost />} />
                     <Route path="/makePost" element={<MakePost />} />
-                    <Route path="/users" element={<Users users={users} />} />
+                    <Route path="/users" element={<Users />} />
                     <Route path="/addUser" element={<AddUser />} />
                     <Route path="/communities" element={<Communities />} />
                     <Route path="/addComm" element={<AddComm />} />

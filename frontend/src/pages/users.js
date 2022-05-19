@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState, useEffect}  from 'react';
 import { Link, useNavigate } from "react-router-dom";
 import UserComponent from '../components/userComp';
 import Axios from "axios";
@@ -7,6 +7,19 @@ import Axios from "axios";
 
 function Users({users}) {
     const navigate = useNavigate();
+    const [userlist, setUserList] = useState([]);
+
+    const loadUsers = () => {
+        Axios.get("http://flip2.engr.oregonstate.edu:8056/users").then((result) => {
+            // (console.log(result)) For testing
+            setUserList(result.data)
+        })
+    };
+
+    useEffect(() => {
+        loadUsers();
+    }, []);
+
     return(
         <div>
             <span className="nav-bar">
@@ -33,7 +46,7 @@ function Users({users}) {
                         </tr>
                     </thead>
                     <tbody>
-                        <UserComponent users={users}/>
+                        <UserComponent users={userlist}/>
                     </tbody>
                 </table>
                 
