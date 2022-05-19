@@ -6,8 +6,7 @@ const db = require('./db-connector');
 const cors = require('cors');
 
 app.use(express.json());
-app.use(cors())
-
+app.use(cors()) // Have to use cors in order to run delete functions on flip servers
 app.use(function(req, res, next) {
     res.header("Access-Control-Allow-Origin", "*");
     res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
@@ -15,9 +14,9 @@ app.use(function(req, res, next) {
   });
 
 //General Route Test
-app.get('/', function(req, res) {
-    res.send("Working")
-});
+// app.get('/', function(req, res) {
+//     res.send("Working")
+// });
 
 //User Routes
 app.post("/addUser", (req, res) => {
@@ -59,7 +58,7 @@ app.delete("/delete/:username", (req, res) => {
         if(err) {
             console.log(err)
         } else {
-        //res.send(JSON.stringify(results))--> NEEDED IF WE DON'T USE AXIOS
+            //res.send(JSON.stringify(results))--> NEEDED IF WE DON'T USE AXIOS
             res.send(result);
         }
     }

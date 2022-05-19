@@ -6,7 +6,7 @@ import Axios from "axios";
 
 function Users({users}) {
     const navigate = useNavigate();
-    const [userlist, setUserList] = useState([]);
+    const [userList, setUserList] = useState([]);
 
     const loadUsers = () => {
         Axios.get("http://flip2.engr.oregonstate.edu:8056/users").then((result) => {
@@ -49,7 +49,7 @@ function Users({users}) {
                         </tr>
                     </thead>
                     <tbody>
-                        <UserComponent users={userlist} deleteUser={deleteUser}/>
+                        <UserComponent users={userList} deleteUser={deleteUser}/>
                     </tbody>
                 </table>
                 
