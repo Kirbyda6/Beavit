@@ -1,7 +1,8 @@
 import React from "react";
 import UserRow from "./userRow";
+import Axios from "axios";
 
-function UserComponent ({ users }) {
+function UserComponent ({ users, deleteUser }) {
     if (users.length === 0) {
         return(
             <tr>
@@ -10,7 +11,10 @@ function UserComponent ({ users }) {
         );
     } else {
         return(
-            users.map((x, i) => <UserRow user={x} key={i}/>)
+            users.map((x, i) => <UserRow user={x}
+            deleteUser={deleteUser}
+            key={i}
+            />)
         );
     }
 }

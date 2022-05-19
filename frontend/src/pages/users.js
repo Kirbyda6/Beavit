@@ -4,7 +4,6 @@ import UserComponent from '../components/userComp';
 import Axios from "axios";
 
 
-
 function Users({users}) {
     const navigate = useNavigate();
     const [userlist, setUserList] = useState([]);
@@ -19,6 +18,10 @@ function Users({users}) {
     useEffect(() => {
         loadUsers();
     }, []);
+
+    const deleteUser = (username) => {
+        Axios.delete(`http://flip2.engr.oregonstate.edu:8056/delete/${username}`)
+    };
 
     return(
         <div>
@@ -46,7 +49,7 @@ function Users({users}) {
                         </tr>
                     </thead>
                     <tbody>
-                        <UserComponent users={userlist}/>
+                        <UserComponent users={userlist} deleteUser={deleteUser}/>
                     </tbody>
                 </table>
                 

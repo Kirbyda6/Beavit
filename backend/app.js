@@ -3,8 +3,10 @@ const express = require('express');
 const app = express();
 const PORT = 8056;
 const db = require('./db-connector');
+const cors = require('cors');
 
 app.use(express.json());
+app.use(cors())
 
 app.use(function(req, res, next) {
     res.header("Access-Control-Allow-Origin", "*");
@@ -49,14 +51,20 @@ app.get("/users", (req, res) => {
     });
 })
 
-app.delete("/users", (req, res) => {
-    const username = req.body.username;
-    const userJoinDate = req.body.userJoinDate;
-    const userThumbsUp = req.body.userThumbsUp;
-    const userThumbsDown = req.body.userThumbsDown;
-
-    deleteUserQuery = 'DELETE '
-})
+app.delete("/delete/:username", (req, res) => {
+    
+    const username = req.params.username
+        
+    db.pool.query('DELETE FROM Users WHERE Username = ?', username, (err, result) => {
+        if(err) {
+            console.log(err)
+        } else {
+        //res.send(JSON.stringify(results))--> NEEDED IF WE DON'T USE AXIOS
+            res.send(result);
+        }
+    }
+    );
+});
 
 
 
