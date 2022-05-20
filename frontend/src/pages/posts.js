@@ -15,6 +15,7 @@ function Posts({ posts, setCurPost, reren, setRerender }) {
                 <Link to='/communities'> Communities </Link>
                 <Link to='/communityUsers'> Community Users </Link>
             </span>
+            
             <div className="content">
                 <table>
                     <thead>

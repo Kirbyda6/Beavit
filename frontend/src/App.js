@@ -18,8 +18,34 @@ import MakeComment from './pages/makeComment';
 import EditComment from './pages/editComment';
 import MakePost from './pages/makePost';
 import AddCommUsr from './pages/AddUsrCom';
+//import Axios from 'axios';
 
 function App() {
+    //LINES BELOW ARE LOADING USER DATA VIA FETCH AND/OR AXIOS. CURRENTLY LOADS DATA IN Users.JS INSTEAD
+    // const loadUsers = async () => {
+    //     await fetch('http://flip2.engr.oregonstate.edu:8056/users', {
+    //         method: 'GET',
+    //         headers: {
+    //             'Content-Type': 'application/json'
+    //         },
+    //         // mode: 'no-cors'
+    //     })
+    //     .then(res => {return res.json()})
+    //     .then(result => {setUsers(result)})
+    // }
+
+
+    //LINES BELOW ARE FOR IF WE WANT THIS DATA TO BE LOADED THROUGH THIS FILE INSTEAD OF Users.JS
+    // const loadUsers = () => {
+    //     Axios.get("http://flip2.engr.oregonstate.edu:8056/users").then((response) => {
+    //         (console.log(response))
+    //         setUsers(response.data)
+    //     })
+    // };
+
+    // useEffect(() => {
+    //     loadUsers();
+    // }, []);
     const [rerender, setRerender] = useState(true);
     const [users, setUsers] = useState([]);
     const [posts, setPosts] = useState([]);
