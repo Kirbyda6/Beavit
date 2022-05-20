@@ -9,7 +9,7 @@ function Users({users}) {
     const [userList, setUserList] = useState([]);
 
     const loadUsers = () => {
-        Axios.get("http://flip2.engr.oregonstate.edu:8056/users").then((result) => {
+        Axios.get("http://flip2.engr.oregonstate.edu:7352/users").then((result) => {
             // (console.log(result)) For testing
             setUserList(result.data)
         })
@@ -20,7 +20,7 @@ function Users({users}) {
     }, []);
 
     const deleteUser = (username) => {
-        Axios.delete(`http://flip2.engr.oregonstate.edu:8056/delete/${username}`)
+        Axios.delete(`http://flip2.engr.oregonstate.edu:7352/delete/${username}`)
     };
 
     return(

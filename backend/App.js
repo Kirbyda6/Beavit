@@ -1,8 +1,10 @@
 var express = require('express');
 var app = express();
 var db = require('./db_conn')
+const cors = require('cors');
 PORT = 7352;
 app.use(express.json())
+app.use(cors())
 
 app.use(function(req, res, next) {
     res.header("Access-Control-Allow-Origin", "*");
@@ -67,6 +69,21 @@ app.delete('/posts/:id', function(req, res) {
     });
 });
 
+app.delete("/delete/:username", (req, res) => {
+    
+    const username = req.params.username
+        
+    db.pool.query('DELETE FROM Users WHERE Username = ?', username, (err, result) => {
+        if(err) {
+            console.log(err)
+        } else {
+            //res.send(JSON.stringify(results))--> NEEDED IF WE DON'T USE AXIOS
+            res.send(result);
+        }
+    }
+    );
+});
+
 // Create operations for Tables
 
 app.post('/posts', function(req, res) {
@@ -76,6 +93,24 @@ app.post('/posts', function(req, res) {
     db.pool.query(query1, function (err, results, fields){
         res.send(JSON.stringify(results));
     });
+});
+
+app.post("/addUser", (req, res) => {
+    const username = req.body.username;
+    const userJoinDate = req.body.userJoinDate;
+    const userThumbsUp = req.body.userThumbsUp;
+    const userThumbsDown = req.body.userThumbsDown;
+
+    db.pool.query(
+        'INSERT INTO Users (Username, JoinDate, ThumbsUpCt, ThumbsDwnCt) VALUES (?,?,?,?);', 
+        [username, userJoinDate, userThumbsUp, userThumbsDown], (err, result) => {
+            if (err) {
+                console.log(error)
+            } else {
+                res.send("User added")
+            }
+        }
+        );
 });
 
 // Update operations for Tables
