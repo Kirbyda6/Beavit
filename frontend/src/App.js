@@ -21,28 +21,6 @@ import AddCommUsr from './pages/AddUsrCom';
 //import Axios from 'axios';
 
 function App() {
-    // const [users, setUsers] = useState([]); NOT CURRENTLY NEEDED AS DATA LOADS THROUGH Users.JS
-    const [posts, setPosts] = useState([]);
-    const [comments, setComments] = useState([]);
-    const [comms, setComms] = useState([]);
-    const [commsUsrs, setcommsUsrs] = useState([]);
-
-    const loadPosts = async () => {
-        await fetch('http://flip2.engr.oregonstate.edu:8056/posts', {
-            method: 'GET',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            // mode: 'no-cors'
-        })
-        .then(res => {return res.json()})
-        .then(result => {setPosts(result)})
-    }
-    
-    useEffect(() => {
-        loadPosts();
-    }, []);
-    
     //LINES BELOW ARE LOADING USER DATA VIA FETCH AND/OR AXIOS. CURRENTLY LOADS DATA IN Users.JS INSTEAD
     // const loadUsers = async () => {
     //     await fetch('http://flip2.engr.oregonstate.edu:8056/users', {
@@ -68,15 +46,73 @@ function App() {
     // useEffect(() => {
     //     loadUsers();
     // }, []);
+    const [rerender, setRerender] = useState(true);
+    const [users, setUsers] = useState([]);
+    const [posts, setPosts] = useState([]);
+    const [curPost, setCurPost] = useState([]);
+    const [comments, setComments] = useState([]);
+    const [comms, setComms] = useState([]);
+    const [commsUsrs, setCommsUsrs] = useState([]);
+
+    const loadTables = async () => {
+        await fetch('http://flip2.engr.oregonstate.edu:7352/users', {
+            method: 'GET',
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        })
+        .then(res => {return res.json()})
+        .then(result => {setUsers(result)})
+
+        await fetch('http://flip2.engr.oregonstate.edu:7352/posts', {
+            method: 'GET',
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        })
+        .then(res => {return res.json()})
+        .then(result => {setPosts(result)})
+
+        await fetch('http://flip2.engr.oregonstate.edu:7352/comments', {
+            method: 'GET',
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        })
+        .then(res => {return res.json()})
+        .then(result => {setComments(result)})
+
+        await fetch('http://flip2.engr.oregonstate.edu:7352/comms', {
+            method: 'GET',
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        })
+        .then(res => {return res.json()})
+        .then(result => {setComms(result)})
+
+        await fetch('http://flip2.engr.oregonstate.edu:7352/commsUsrs', {
+            method: 'GET',
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        })
+        .then(res => {return res.json()})
+        .then(result => {setCommsUsrs(result)})
+    }
+
+    useEffect(() => {
+        loadTables();
+    }, [rerender]);
 
     return (
         <div id='app'>
             <Router>
                 <Routes>
                     <Route path="/" element={<Homepage />} />
-                    <Route path="/posts" element={<Posts posts={posts} />} />
-                    <Route path="/editPost" element={<EditPost />} />
-                    <Route path="/makePost" element={<MakePost />} />
+                    <Route path="/posts" element={<Posts posts={posts} setCurPost={setCurPost} reren={rerender} setRerender={setRerender} />} />
+                    <Route path="/editPost" element={<EditPost curPost={curPost} reren={rerender} setRerender={setRerender} comms={comms} users={users} />} />
+                    <Route path="/makePost" element={<MakePost reren={rerender} setRerender={setRerender} users={users} comms={comms} />} />
                     <Route path="/users" element={<Users />} />
                     <Route path="/addUser" element={<AddUser />} />
                     <Route path="/communities" element={<Communities />} />
