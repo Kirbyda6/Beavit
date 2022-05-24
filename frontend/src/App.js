@@ -46,8 +46,10 @@ function App() {
     // useEffect(() => {
     //     loadUsers();
     // }, []);
+
     const [rerender, setRerender] = useState(true);
     const [users, setUsers] = useState([]);
+    const [curUser, setCurUser] = useState([]);
     const [posts, setPosts] = useState([]);
     const [curPost, setCurPost] = useState([]);
     const [comments, setComments] = useState([]);
@@ -55,7 +57,7 @@ function App() {
     const [commsUsrs, setCommsUsrs] = useState([]);
 
     const loadTables = async () => {
-        await fetch('http://flip2.engr.oregonstate.edu:8056/users', {
+        await fetch('http://flip3.engr.oregonstate.edu:8056/users', {
             method: 'GET',
             headers: {
                 'Content-Type': 'application/json'
@@ -113,8 +115,8 @@ function App() {
                     <Route path="/posts" element={<Posts posts={posts} setCurPost={setCurPost} reren={rerender} setRerender={setRerender} />} />
                     <Route path="/editPost" element={<EditPost curPost={curPost} reren={rerender} setRerender={setRerender} comms={comms} users={users} />} />
                     <Route path="/makePost" element={<MakePost reren={rerender} setRerender={setRerender} users={users} comms={comms} />} />
-                    <Route path="/users" element={<Users />} />
-                    <Route path="/addUser" element={<AddUser />} />
+                    <Route path="/users" element={<Users users={users} setcurUser={setCurUser} reren={rerender} setRerender={setRerender}/>} />
+                    <Route path="/addUser" element={<AddUser reren={rerender} setRerender={setRerender}/>} />
                     <Route path="/communities" element={<Communities />} />
                     <Route path="/addComm" element={<AddComm />} />
                     <Route path="/comments" element={<Comments />} />

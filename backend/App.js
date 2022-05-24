@@ -2,6 +2,7 @@ const express = require('express');
 const app = express();
 const db = require('./db-connector');
 const cors = require('cors');
+const { query } = require('express');
 PORT = 8056;
 
 app.use(express.json())
@@ -70,20 +71,28 @@ app.delete('/posts/:id', function(req, res) {
     });
 });
 
-app.delete("/delete/:username", (req, res) => {
-    
+app.delete('/users/:username', function(req, res) {
     const username = req.params.username
         
-    db.pool.query('DELETE FROM Users WHERE Username = ?', username, (err, result) => {
-        if(err) {
-            console.log(err)
-        } else {
-            //res.send(JSON.stringify(results))--> NEEDED IF WE DON'T USE AXIOS
-            res.send(result);
-        }
-    }
-    );
+    db.pool.query('DELETE FROM Users WHERE Username = ?;', username, function (err, results, fields){
+        res.send('Deleted!');
+    });
 });
+
+// app.delete("/delete/:username", (req, res) => {
+    
+//     const username = req.params.username
+        
+//     db.pool.query('DELETE FROM Users WHERE Username = ?;', username, (err, result) => {
+//         if(err) {
+//             console.log(err)
+//         } else {
+//             //res.send(JSON.stringify(results))--> NEEDED IF WE DON'T USE AXIOS
+//             res.send(result);
+//         }
+//     }
+//     );
+// });
 
 // Create operations for Tables
 
@@ -96,25 +105,33 @@ app.post('/posts', function(req, res) {
     });
 });
 
-app.post("/addUser", (req, res) => {
-    const username = req.body.username;
-    const userJoinDate = req.body.userJoinDate;
-    const userThumbsUp = req.body.userThumbsUp;
-    const userThumbsDown = req.body.userThumbsDown;
+app.post('/users', function(req, res) {
+    query1 = `INSERT INTO Users (Username, JoinDate, ThumbsUpCt, ThumbsDwnCt)
+    VALUES ('${req.body.username}',  '${req.body.userJoinDate}', ${req.body.userThumbsUp}, ${req.body.userThumbsDown});`;
 
-    db.pool.query(
-        'INSERT INTO Users (Username, JoinDate, ThumbsUpCt, ThumbsDwnCt) VALUES (?,?,?,?);', 
-        [username, userJoinDate, userThumbsUp, userThumbsDown], (err, result) => {
-            if (err) {
-                console.log(error)
-            } else {
-                res.send("User added")
-            }
-        }
-        );
+    db.pool.query(query1, function (err, results, fields){
+        res.send(JSON.stringify(results));
+    });
 });
 
 // Update operations for Tables
+// app.post("/addUser", (req, res) => {
+//     const username = req.body.username;
+//     const userJoinDate = req.body.userJoinDate;
+//     const userThumbsUp = req.body.userThumbsUp;
+//     const userThumbsDown = req.body.userThumbsDown;
+
+//     db.pool.query(
+//         'INSERT INTO Users (Username, JoinDate, ThumbsUpCt, ThumbsDwnCt) VALUES (?,?,?,?);', 
+//         [username, userJoinDate, userThumbsUp, userThumbsDown], (err, result) => {
+//             if (err) {
+//                 console.log(error)
+//             } else {
+//                 res.send("User added")
+//             }
+//         }
+//         );
+// });
 
 app.put('/posts', function(req, res) {
     query1 = `UPDATE Posts SET OP_UserID = ${req.body.poster}, PostTitle = '${req.body.title}',

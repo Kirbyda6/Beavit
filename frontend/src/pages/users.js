@@ -4,25 +4,25 @@ import UserComponent from '../components/userComp';
 import Axios from "axios";
 
 
-function Users({users}) {
+function Users({users, setCurUser, reren, setRerender}) {
     const navigate = useNavigate();
-    const [userList, setUserList] = useState([]);
+    // const [userList, setUserList] = useState([]);
 
-    const loadUsers = () => {
-        Axios.get("http://flip2.engr.oregonstate.edu:8056/users").then((result) => {
-            // (console.log(result)) For testing
-            setUserList(result.data)
-        })
-    };
+    // const loadUsers = () => {
+    //     Axios.get("http://flip2.engr.oregonstate.edu:8056/users").then((result) => {
+    //         // (console.log(result)) For testing
+    //         setUserList(result.data)
+    //     })
+    // };
 
-    useEffect(() => {
-        loadUsers();
-    }, []);
+    // useEffect(() => {
+    //     loadUsers();
+    // }, []);
 
-    const deleteUser = (username) => {
-        Axios.delete(`http://flip2.engr.oregonstate.edu:8056/delete/${username}`)
-    };
-
+    // const deleteUser = (username) => {
+    //     Axios.delete(`http://flip2.engr.oregonstate.edu:8056/delete/${username}`)
+    //     .then(setRerender(!reren))
+    // };
     return(
         <div>
             <span className="nav-bar">
@@ -49,7 +49,8 @@ function Users({users}) {
                         </tr>
                     </thead>
                     <tbody>
-                        <UserComponent users={userList} deleteUser={deleteUser}/>
+                        <UserComponent users={users} setCurUser = {setCurUser} reren={reren} setRerender={setRerender}/> 
+                        {/* <UserComponent users={users} deleteUser={deleteUser} reren={reren} setRerender={setRerender}/> */}
                     </tbody>
                 </table>
                 

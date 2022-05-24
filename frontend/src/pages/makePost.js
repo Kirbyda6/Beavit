@@ -11,7 +11,7 @@ function MakePost({ reren, setRerender, users, comms }) {
     const [comm, setComm] = useState('')
 
     const createPost = async () => {
-        await fetch('http://flip2.engr.oregonstate.edu:8056/posts', {
+        await fetch('http://flip3.engr.oregonstate.edu:8056/posts', {
             method: "POST",
             headers: {
                 'Content-Type': 'application/json'
@@ -31,18 +31,27 @@ function MakePost({ reren, setRerender, users, comms }) {
             <Link to='/posts'>Cancel</Link>
             <fieldset>
                 <legend>Make Post</legend>
+
                 <label htmlFor="Poster">Poster: </label>
                 <select className="txtbar" name="Poster" onChange={i => setPoster(i.target.value)}>
                     <option value={null}>--Please pick a User--</option>
                     <UserOptions users={users}/>
                 </select><br></br>
+
                 <label htmlFor="Title">Title: </label>
-                <input type='text' value={title} onChange={i => setTitle(i.target.value)} name="Title" className="txtbar"/><br></br>
+                <input 
+                type='text' 
+                value={title}
+                onChange={i => setTitle(i.target.value)} 
+                name="Title" 
+                className="txtbar"/><br></br>
+
                 <label htmlFor="Community">Community: </label>
                 <select className="txtbar" name="Community" onChange={i => setComm(i.target.value)}>
                     <option value={null}>--Please pick a Community--</option>
                     <CommOptions comms={comms}/>
                 </select><br></br>
+
                 <button onClick={() => createPost()}>Post</button>
             </fieldset>
         </div>

@@ -2,7 +2,7 @@ import React from "react";
 import UserRow from "./userRow";
 import Axios from "axios";
 
-function UserComponent ({ users, deleteUser }) {
+function UserComponent ({ users, setCurUser, reren, setRerender}) {
     if (users.length === 0) {
         return(
             <tr>
@@ -12,11 +12,14 @@ function UserComponent ({ users, deleteUser }) {
     } else {
         return(
             users.map((x, i) => <UserRow user={x}
-            deleteUser={deleteUser}
+            setCurUser={setCurUser}
+            reren={reren} 
+            setRerender={setRerender}
+            // deleteUser={deleteUser}
             key={i}
             />)
         );
     }
 }
 
-export default UserComponent
+export default UserComponent;

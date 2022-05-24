@@ -10,7 +10,7 @@ function PostComponent ({ posts, setCurPost, reren, setRerender }) {
         );
     } else {
         return(
-            posts.map((x, i) => <PostRow post={x} setCurPost={setCurPost}  reren={reren} setRerender={setRerender} key={i}/>)
+            posts.map((x, i) => <PostRow post={x} setCurPost={setCurPost} reren={reren} setRerender={setRerender} key={i}/>)
         );
     }
 }
