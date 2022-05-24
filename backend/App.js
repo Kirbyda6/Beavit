@@ -3,6 +3,7 @@ const app = express();
 const db = require('./db-connector');
 const cors = require('cors');
 PORT = 8056;
+
 app.use(express.json())
 app.use(cors())
 
