@@ -55,7 +55,7 @@ function App() {
     const [commsUsrs, setCommsUsrs] = useState([]);
 
     const loadTables = async () => {
-        await fetch('http://flip2.engr.oregonstate.edu:7352/users', {
+        await fetch('http://flip2.engr.oregonstate.edu:8056/users', {
             method: 'GET',
             headers: {
                 'Content-Type': 'application/json'
@@ -64,7 +64,7 @@ function App() {
         .then(res => {return res.json()})
         .then(result => {setUsers(result)})
 
-        await fetch('http://flip2.engr.oregonstate.edu:7352/posts', {
+        await fetch('http://flip2.engr.oregonstate.edu:8056/posts', {
             method: 'GET',
             headers: {
                 'Content-Type': 'application/json'
@@ -73,7 +73,7 @@ function App() {
         .then(res => {return res.json()})
         .then(result => {setPosts(result)})
 
-        await fetch('http://flip2.engr.oregonstate.edu:7352/comments', {
+        await fetch('http://flip2.engr.oregonstate.edu:8056/comments', {
             method: 'GET',
             headers: {
                 'Content-Type': 'application/json'
@@ -82,7 +82,7 @@ function App() {
         .then(res => {return res.json()})
         .then(result => {setComments(result)})
 
-        await fetch('http://flip2.engr.oregonstate.edu:7352/comms', {
+        await fetch('http://flip2.engr.oregonstate.edu:8056/comms', {
             method: 'GET',
             headers: {
                 'Content-Type': 'application/json'
@@ -91,7 +91,7 @@ function App() {
         .then(res => {return res.json()})
         .then(result => {setComms(result)})
 
-        await fetch('http://flip2.engr.oregonstate.edu:7352/commsUsrs', {
+        await fetch('http://flip2.engr.oregonstate.edu:8056/commsUsrs', {
             method: 'GET',
             headers: {
                 'Content-Type': 'application/json'

@@ -11,7 +11,7 @@ function MakePost({ reren, setRerender, users, comms }) {
     const [comm, setComm] = useState('')
 
     const createPost = async () => {
-        await fetch('http://flip2.engr.oregonstate.edu:7352/posts', {
+        await fetch('http://flip2.engr.oregonstate.edu:8056/posts', {
             method: "POST",
             headers: {
                 'Content-Type': 'application/json'

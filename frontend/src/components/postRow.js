@@ -6,7 +6,7 @@ function PostRow ({ post, setCurPost, reren, setRerender }) {
     const navigate = useNavigate()
 
     const deletePost = async (id) => {
-        const url = `http://flip2.engr.oregonstate.edu:7352/posts/${id}`
+        const url = `http://flip2.engr.oregonstate.edu:8056/posts/${id}`
         await fetch(url, {
             method: 'DELETE',
             headers: {

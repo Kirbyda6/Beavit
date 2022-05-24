@@ -11,7 +11,7 @@ function Users() {
     const [userThumbsDown, setUserThumbsDown] = useState(0);
 
     const addUser = () => {
-        Axios.post("http://flip2.engr.oregonstate.edu:7352/addUser", { //using axios to send info in object from React to backend
+        Axios.post("http://flip2.engr.oregonstate.edu:8056/addUser", { //using axios to send info in object from React to backend
             username: username,
             userJoinDate: userJoinDate,
             userThumbsUp: userThumbsUp,

@@ -14,7 +14,7 @@ function EditPost({ curPost, reren, setRerender, comms, users }) {
     const [comm, setComm] = useState(curPost.Communities_CommunityID)
 
     const updatePost = async () => {
-        await fetch('http://flip2.engr.oregonstate.edu:7352/posts', {
+        await fetch('http://flip2.engr.oregonstate.edu:8056/posts', {
             method: "PUT",
             headers: {
                 'Content-Type': 'application/json'
