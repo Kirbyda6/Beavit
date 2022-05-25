@@ -1,8 +1,44 @@
-import React, {useState} from 'react';
+import { React, useState } from 'react';
 import { useNavigate, Link } from "react-router-dom";
+import UserOptions from '../components/userOptions';
+import PostOptions from '../components/postOptions';
+import CmntOptions from '../components/cmntOptions';
 
-function MakeComment() {
+function MakeComment({ comments, posts, users, reren, setRerender }) {
     const navigate = useNavigate()
+
+    const [usr, setUsr] = useState(comments[0].Commenter_UserID)
+    const [date, setDate] = useState()
+    const [thmbUp, setThmbUp] = useState()
+    const [thmbDwn, setThmbDwn] = useState()
+    const [comment, setComment] = useState()
+    const [parentPost, setParentPost] = useState(comments[0].Parent_Post_PostID)
+    const [parentCmnt, setParentCmnt] = useState(comments[0].Parent_Comment_CommentID)
+
+    const makeCmnt = async () => {
+        if(thmbUp >= 0 && thmbDwn >= 0 && comment != undefined) {
+            await fetch('http://flip2.engr.oregonstate.edu:7352/comments', {
+                method: "POST",
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({
+                    user: usr,
+                    date: date,
+                    thmbsUp: thmbUp,
+                    ThmbsDwn: thmbDwn,
+                    comment: comment,
+                    parentPost: parentPost,
+                    parentCmnt: parentCmnt
+                })
+            })
+            .then(() => {setRerender(!reren)})
+            .then(() => {navigate('/comments')})            
+        } else {
+            alert("Thumbs Up and Thumbs Down must be positive integers and fields must be filled!")
+        }
+    }
+
     return(
         <div>
             <Link to='/comments'>Cancel</Link>
@@ -10,38 +46,34 @@ function MakeComment() {
                 <legend>Make Comment</legend>
 
                 <label htmlFor="Made By">Made By: </label>
-                <input type='text' name="Made By" className="txtbar"/><br></br>
+                <select name="Made By" className="txtbar" defaultValue={comments[0].Commenter_UserID} onChange={i => setUsr(i.target.value)}>
+                    <UserOptions users={users}/>
+                </select><br></br>
 
                 <label htmlFor="dateMade">Date Made: </label>
-                <input type='date' name="dateMade" className="txtbar"/><br></br>
+                <input type='date' name="dateMade" className="txtbar" onChange={i => setDate(i.target.value)}/><br></br>
 
                 <label htmlFor="commentThumbsUp">Comment's Thumbs Up Total: </label>
-                <input type='number' name="commentThumbsUp" className="txtbar"/><br></br>
+                <input type='number' name="commentThumbsUp" className="txtbar" onChange={i => setThmbUp(i.target.value)}/><br></br>
 
                 <label htmlFor="commentThumbsDown">Comment's Thumbs Down Total: </label>
-                <input type='number' name="commentThumbsDown" className="txtbar"/><br></br>
+                <input type='number' name="commentThumbsDown" className="txtbar" onChange={i => setThmbDwn(i.target.value)}/><br></br>
 
                 <label htmlFor="Comment">Comment: </label>
-                <input type='text' name="Comment" className="txtbar"/><br></br>
+                <input type='text' name="Comment" className="txtbar" onChange={i => setComment(i.target.value)}/><br></br>
 
                 <label htmlFor="Post">Parent Post: </label>
-                <select name="Post">
-                    <option value={1111}>What class should I take next quarter?</option>
-                    <option value={2222}>Check out my cute dog!</option>
-                    <option value={3333}>Should I see the latest Marvel movie?</option>
+                <select name="Post" className="txtbar" defaultValue={comments[0].Parent_Post_PostID} onChange={i => setParentPost(i.target.value)}>
+                    <PostOptions posts={posts}/>
                 </select><br></br>
 
                 <label htmlFor="Reply">Replying to: </label>               
-                <select name="Reply">
+                <select name="Reply" className="txtbar" defaultValue={comments[0].Parent_Comment_CommentID} onChange={i => setParentCmnt(i.target.value)}>
                     <option value={null}>NULL</option>
-                    <option value={1}>I think you should take CS 271!</option>
-                    <option value={2}>Yes! I thought it was a lot better than the last Marvel movie.</option>
-                    <option value={3}>I really liked CS 361 and recommend it for Winter quarter.</option>
-                    <option value={4}>Me too! I'm looking forward to the sequal.</option>
-                    <option value={5}>So cute! Looks just like mine!</option>
+                    <CmntOptions cmts={comments}/>
                 </select><br></br>
 
-                <button onClick={() => navigate('/comments')}>Add</button>
+                <button onClick={() => makeCmnt()}>Add</button>
             </fieldset>
         </div>
     );

@@ -1,8 +1,8 @@
 import React from "react";
 import { Link, useNavigate } from "react-router-dom";
-import { MdDeleteForever } from "react-icons/md";
+import CommComponent from "../components/commComp";
 
-function Communities() {
+function Communities({ comms, reren, setRerender }) {
     const navigate = useNavigate();
     return(
         <div>
@@ -18,9 +18,7 @@ function Communities() {
                 <table>
                     <thead><tr><th>Community Name</th><th>Member Count</th></tr></thead>
                     <tbody>
-                        <tr><td>OSU</td><td>159</td><td><MdDeleteForever id="icon"/></td></tr>
-                        <tr><td>Pets</td><td>20000</td><td><MdDeleteForever id="icon"/></td></tr>
-                        <tr><td>Movies</td><td>50000</td><td><MdDeleteForever id="icon"/></td></tr>
+                        <CommComponent comms={comms} reren={reren} setRerender={setRerender}/>
                     </tbody>
                 </table>
                 <button onClick={() => navigate('/addComm')}>Add A Community</button>

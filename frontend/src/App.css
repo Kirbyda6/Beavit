@@ -7,6 +7,10 @@ body {
   font-family: Verdana, Geneva, Tahoma, sans-serif;
 }
 
+p {
+  margin: 2% 60% 0% 5%;
+}
+
 #beavit {
   color: #d7dadc;
   font-family: cursive;
@@ -30,7 +34,7 @@ table, td {
   visibility: hidden;
   text-align: center;
   position: absolute;
-  right: 2%;
+  right: 0%;
   z-index: 1;
 }
 
