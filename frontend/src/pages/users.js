@@ -1,12 +1,14 @@
 import React, {useState, useEffect}  from 'react';
 import { Link, useNavigate } from "react-router-dom";
 import UserComponent from '../components/userComp';
+import UserComponentSearch from "../components/UserCompSearch";
 import Axios from "axios";
 
-
-function Users({users, setCurUser, reren, setRerender}) {
+//function Users({users, searchUser, setSearchUser, reren, setRerender})
+function Users({users, reren, setRerender}) {
     const navigate = useNavigate();
-    // const [userList, setUserList] = useState([]);
+    const [searchUsername, setSearchUsername] = useState('');
+    const [searchUser, setSearchUser] = useState([]);
 
     // const loadUsers = () => {
     //     Axios.get("http://flip2.engr.oregonstate.edu:8056/users").then((result) => {
@@ -23,6 +25,22 @@ function Users({users, setCurUser, reren, setRerender}) {
     //     Axios.delete(`http://flip2.engr.oregonstate.edu:8056/delete/${username}`)
     //     .then(setRerender(!reren))
     // };
+
+    const searchResult = async (searchUsername) => {
+        console.log(searchUsername)
+        const results = await fetch(`http://flip3.engr.oregonstate.edu:8057/users/${searchUsername}`, {
+            method: "GET",
+            headers: {
+                'Content-Type': 'application/json'
+            },
+        })
+        .then(setSearchUser(results))
+        //.then(results => {console.log(results.json())})
+        //.then(setSearchUser)
+        .then(console.log(searchUser))
+        .then(() => {navigate('/userSearchResults')})
+    }
+    
     return(
         <div>
             <span className="nav-bar">
@@ -36,8 +54,14 @@ function Users({users, setCurUser, reren, setRerender}) {
             
             <div className="content">
                 <div className='search'>
-                    <input type='text' name='usrname' className="txtbar" placeholder="Search For Username"></input>
-                    <button>Search</button>
+                    <input 
+                    type='text' 
+                    name='usrname' 
+                    className="txtbar" 
+                    placeholder="Search For Username"
+                    onChange={event => setSearchUsername(event.target.value)}
+                    ></input>
+                    <button onClick={() => {searchResult(searchUsername)}}>Search</button>
                 </div>
                 <table>
                     <thead>
@@ -49,7 +73,7 @@ function Users({users, setCurUser, reren, setRerender}) {
                         </tr>
                     </thead>
                     <tbody>
-                        <UserComponent users={users} setCurUser = {setCurUser} reren={reren} setRerender={setRerender}/> 
+                        <UserComponent users={users} searchUser={searchUser} reren={reren} setRerender={setRerender}/> 
                         {/* <UserComponent users={users} deleteUser={deleteUser} reren={reren} setRerender={setRerender}/> */}
                     </tbody>
                 </table>

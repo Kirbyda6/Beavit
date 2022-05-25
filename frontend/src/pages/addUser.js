@@ -2,7 +2,7 @@ import {React, useState} from 'react';
 import { useNavigate, Link } from "react-router-dom";
 import Axios from "axios";
 
-function Users({reren, setRerender}) {
+function AddUser({ reren, setRerender }) {
     const navigate = useNavigate();
 
     const [username, setUsername] = useState("");
@@ -23,7 +23,7 @@ function Users({reren, setRerender}) {
     //      // sends user back to the Users page after addition
     // };
     const createUser = async () => {
-        await fetch('http://flip3.engr.oregonstate.edu:8056/users', {
+        await fetch('http://flip3.engr.oregonstate.edu:8057/users', {
             method: "POST",
             headers: {
                 'Content-Type': 'application/json'
@@ -86,4 +86,4 @@ function Users({reren, setRerender}) {
     );
 }
 
-export default Users;
+export default AddUser;

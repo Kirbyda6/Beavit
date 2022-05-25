@@ -3,7 +3,7 @@ const app = express();
 const db = require('./db-connector');
 const cors = require('cors');
 const { query } = require('express');
-PORT = 8056;
+PORT = 8057;
 
 app.use(express.json())
 app.use(cors())
@@ -26,6 +26,14 @@ app.get('/users', function(req, res) {
 
     db.pool.query(query1, function (err, results, fields){
         res.send(JSON.stringify(results));
+    });
+});
+
+app.get('/users/:username', function(req, res) {
+    const username = req.params.username
+    db.pool.query('SELECT * FROM Users WHERE Username = ?;', username, function (err, results, fields){
+        res.send(results);
+        // res.send(JSON.stringify(results));
     });
 });
 
@@ -61,20 +69,13 @@ app.get('/commsUsrs', function(req, res) {
     });
 });
 
+
 // Delete operations for Tables
 
 app.delete('/posts/:id', function(req, res) {
     query1 = `DELETE FROM Posts WHERE PostID = ${req.params.id};`;
 
     db.pool.query(query1, function (err, results, fields){
-        res.send('Deleted!');
-    });
-});
-
-app.delete('/users/:username', function(req, res) {
-    const username = req.params.username
-        
-    db.pool.query('DELETE FROM Users WHERE Username = ?;', username, function (err, results, fields){
         res.send('Deleted!');
     });
 });
@@ -93,6 +94,15 @@ app.delete('/users/:username', function(req, res) {
 //     }
 //     );
 // });
+
+app.delete('/users/:username', function(req, res) {
+    const username = req.params.username
+        
+    db.pool.query('DELETE FROM Users WHERE Username = ?;', username, function (err, results, fields){
+        res.send('Deleted!');
+    });
+});
+
 
 // Create operations for Tables
 
@@ -125,7 +135,7 @@ app.post('/users', function(req, res) {
 //         'INSERT INTO Users (Username, JoinDate, ThumbsUpCt, ThumbsDwnCt) VALUES (?,?,?,?);', 
 //         [username, userJoinDate, userThumbsUp, userThumbsDown], (err, result) => {
 //             if (err) {
-//                 console.log(error)
+//                 console.log(err)
 //             } else {
 //                 res.send("User added")
 //             }

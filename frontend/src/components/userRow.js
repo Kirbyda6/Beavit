@@ -4,11 +4,11 @@ import { MdDeleteForever } from "react-icons/md";
 import Axios from "axios";
 
 
-function UserRow ({ user, setCurUser, reren, setRerender }) {
+function UserRow ({ user, reren, setRerender}) {
     const navigate = useNavigate()
     
     const deleteUser = async (username) => {
-        const url = `http://flip3.engr.oregonstate.edu:8056/users/${username}`
+        const url = `http://flip3.engr.oregonstate.edu:8057/users/${username}`
         await fetch(url, {
             method: 'DELETE',
             headers: {
