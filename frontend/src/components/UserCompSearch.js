@@ -10,7 +10,8 @@ function UserComponentSearch ({ searchUser, reren, setRerender}) {
                 <td colSpan={6} style={{textAlign:"center"}}>No Users Found</td>
             </tr>
         );
-    } else {
+    }
+    else {
         return(
             searchUser.map((x, i) => <UserRow 
             user={x}

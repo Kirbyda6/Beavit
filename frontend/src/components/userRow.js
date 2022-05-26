@@ -16,6 +16,7 @@ function UserRow ({ user, reren, setRerender}) {
             }
         })
         .then(setRerender(!reren))
+        .then(navigate('/users'))
     }
 
     return(

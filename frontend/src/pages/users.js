@@ -26,21 +26,23 @@ function Users({users, reren, setRerender, searchUser, setSearchUser}) {
     // };
 
     const searchResult = async (searchUsername) => {
-        console.log(searchUsername)
-        let results = await fetch(`http://flip3.engr.oregonstate.edu:8057/users/${searchUsername}`, {
-            method: "GET",
-            headers: {
-                'Content-Type': 'application/json'
-            },
-        })
-        .then((res) => {
-            return res.json()
-        })
-        .then((searchData) => {
-            console.log(searchData)
-            setSearchUser(searchData)
-        })
-        .then(navigate('/userSearchResults'))
+        if (searchUsername !=0) {
+            let results = await fetch(`http://flip3.engr.oregonstate.edu:8057/users/${searchUsername}`, {
+                method: "GET",
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+            })
+            .then((res) => {
+                return res.json()
+            })
+            .then((searchData) => {
+                setSearchUser(searchData)
+            })
+            .then(navigate('/userSearchResults'))
+        } else {
+            alert("You didn't enter a username")
+        }
     }
     
     
