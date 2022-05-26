@@ -2,16 +2,18 @@ import React from "react";
 import UserRow from "./userRow";
 import Axios from "axios";
 
-function UserComponent ({ users, reren, setRerender}) {
-    if (users.length === 0) {
+function UserComponentSearch ({ searchUser, reren, setRerender}) {
+    console.log(searchUser)
+    if (searchUser.length === 0) {
         return(
             <tr>
-                <td colSpan={6} style={{textAlign:"center"}}>Empty</td>
+                <td colSpan={6} style={{textAlign:"center"}}>No Users Found</td>
             </tr>
         );
-    } else {
+    }
+    else {
         return(
-            users.map((x, i) => <UserRow 
+            searchUser.map((x, i) => <UserRow 
             user={x}
             reren={reren} 
             setRerender={setRerender}
@@ -22,4 +24,4 @@ function UserComponent ({ users, reren, setRerender}) {
     }
 }
 
-export default UserComponent;
+export default UserComponentSearch;

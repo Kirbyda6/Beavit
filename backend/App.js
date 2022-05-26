@@ -1,7 +1,8 @@
-var express = require('express');
-var app = express();
-var db = require('./db_conn')
+const express = require('express');
+const app = express();
+const db = require('./db-connector');
 const cors = require('cors');
+const { query } = require('express');
 PORT = 7352;
 app.use(express.json())
 app.use(cors())
@@ -23,6 +24,14 @@ app.get('/users', function(req, res) {
     query1 = 'SELECT * FROM Users;';
 
     db.pool.query(query1, function (err, results, fields){
+        res.send(JSON.stringify(results));
+    });
+});
+
+app.get('/users/:username', function(req, res) {
+    const username = req.params.username
+    db.pool.query('SELECT * FROM Users WHERE Username = ?;', username, function (err, results, fields){
+        //res.send(results);
         res.send(JSON.stringify(results));
     });
 });

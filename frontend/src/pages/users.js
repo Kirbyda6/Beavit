@@ -1,28 +1,51 @@
 import React, {useState, useEffect}  from 'react';
 import { Link, useNavigate } from "react-router-dom";
 import UserComponent from '../components/userComp';
+import UserComponentSearch from "../components/UserCompSearch";
 import Axios from "axios";
 
-
-function Users({users}) {
+//function Users({users, searchUser, setSearchUser, reren, setRerender})
+function Users({users, reren, setRerender, searchUser, setSearchUser}) {
     const navigate = useNavigate();
-    const [userList, setUserList] = useState([]);
+    const [searchUsername, setSearchUsername] = useState('');
 
-    const loadUsers = () => {
-        Axios.get("http://flip2.engr.oregonstate.edu:7352/users").then((result) => {
-            // (console.log(result)) For testing
-            setUserList(result.data)
-        })
-    };
+    // const loadUsers = () => {
+    //     Axios.get("http://flip2.engr.oregonstate.edu:8056/users").then((result) => {
+    //         // (console.log(result)) For testing
+    //         setUserList(result.data)
+    //     })
+    // };
 
-    useEffect(() => {
-        loadUsers();
-    }, []);
+    // useEffect(() => {
+    //     loadUsers();
+    // }, []);
 
-    const deleteUser = (username) => {
-        Axios.delete(`http://flip2.engr.oregonstate.edu:7352/delete/${username}`)
-    };
+    // const deleteUser = (username) => {
+    //     Axios.delete(`http://flip2.engr.oregonstate.edu:8056/delete/${username}`)
+    //     .then(setRerender(!reren))
+    // };
 
+    const searchResult = async (searchUsername) => {
+        if (searchUsername !=0) {
+            let results = await fetch(`http://flip2.engr.oregonstate.edu:7352/users/${searchUsername}`, {
+                method: "GET",
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+            })
+            .then((res) => {
+                return res.json()
+            })
+            .then((searchData) => {
+                setSearchUser(searchData)
+            })
+            .then(navigate('/userSearchResults'))
+        } else {
+            alert("You didn't enter a username")
+        }
+    }
+    
+    
     return(
         <div>
             <span className="nav-bar">
@@ -36,8 +59,14 @@ function Users({users}) {
             
             <div className="content">
                 <div className='search'>
-                    <input type='text' name='usrname' className="txtbar" placeholder="Search For Username"></input>
-                    <button>Search</button>
+                    <input 
+                    type='text' 
+                    name='usrname' 
+                    className="txtbar" 
+                    placeholder="Search For Username"
+                    onChange={event => setSearchUsername(event.target.value)}
+                    ></input>
+                    <button onClick={() => {searchResult(searchUsername)}}>Search</button>
                 </div>
                 <table>
                     <thead>
@@ -49,7 +78,7 @@ function Users({users}) {
                         </tr>
                     </thead>
                     <tbody>
-                        <UserComponent users={userList} deleteUser={deleteUser}/>
+                        <UserComponent users={users} reren={reren} setRerender={setRerender}/> 
                     </tbody>
                 </table>
                 

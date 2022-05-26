@@ -18,6 +18,7 @@ import MakeComment from './pages/makeComment';
 import EditComment from './pages/editComment';
 import MakePost from './pages/makePost';
 import AddCommUsr from './pages/AddUsrCom';
+import DisplaySearchUser from './pages/userSearchResults';
 //import Axios from 'axios';
 
 function App() {
@@ -46,10 +47,13 @@ function App() {
     // useEffect(() => {
     //     loadUsers();
     // }, []);
+
     const [rerender, setRerender] = useState(true);
     const [users, setUsers] = useState([]);
+    const [searchUser, setSearchUser] = useState([]);
     const [posts, setPosts] = useState([]);
     const [curPost, setCurPost] = useState([]);
+    const [curComnt, setCurComnt] = useState([]);
     const [comments, setComments] = useState([]);
     const [curComnt, setCurComnt] = useState([]);
     const [comms, setComms] = useState([]);
@@ -114,8 +118,9 @@ function App() {
                     <Route path="/posts" element={<Posts posts={posts} setCurPost={setCurPost} reren={rerender} setRerender={setRerender} />} />
                     <Route path="/editPost" element={<EditPost curPost={curPost} reren={rerender} setRerender={setRerender} comms={comms} users={users} />} />
                     <Route path="/makePost" element={<MakePost reren={rerender} setRerender={setRerender} users={users} comms={comms} />} />
-                    <Route path="/users" element={<Users />} />
-                    <Route path="/addUser" element={<AddUser />} />
+                    <Route path="/users" element={<Users users={users} searchUser={searchUser} setSearchUser={setSearchUser} reren={rerender} setRerender={setRerender}/>} />
+                    <Route path="/userSearchResults" element={<DisplaySearchUser searchUser={searchUser} reren={rerender} setRerender={setRerender}/>} />
+                    <Route path="/addUser" element={<AddUser reren={rerender} setRerender={setRerender}/>} />
                     <Route path="/communities" element={<Communities comms={comms} reren={rerender} setRerender={setRerender} />} />
                     <Route path="/addComm" element={<AddComm reren={rerender} setRerender={setRerender} />} />
                     <Route path="/comments" element={<Comments comments={comments} setCurComnt={setCurComnt} reren={rerender} setRerender={setRerender} />} />
