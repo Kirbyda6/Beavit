@@ -6,24 +6,34 @@ import CommOptions from "../components/commOptions";
 function MakePost({ reren, setRerender, users, comms }) {
     const navigate = useNavigate()
 
-    const [poster, setPoster] = useState('')
-    const [title, setTitle] = useState('')
-    const [comm, setComm] = useState('')
+    const [poster, setPoster] = useState(users[0].UserID)
+    const [title, setTitle] = useState()
+    const [thbUp, setThbUp] = useState()
+    const [thbDwn, setThbDwn] = useState()
+    const [date, setDate] = useState()
+    const [comm, setComm] = useState(comms[0].CommunityID)
 
     const createPost = async () => {
-        await fetch('http://flip2.engr.oregonstate.edu:7352/posts', {
-            method: "POST",
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify({
-                poster: poster,
-                title: title,
-                community: comm
+        if(thbUp >= 0 && thbDwn >= 0 && title != undefined) {
+            await fetch('http://flip2.engr.oregonstate.edu:7352/posts', {
+                method: "POST",
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({
+                    poster: poster,
+                    title: title,
+                    ThumbsUpCt: thbUp,
+                    ThumbsDwnCt: thbDwn,
+                    date: date,
+                    community: comm
+                })
             })
-        })
-        .then(() => {setRerender(!reren)})
-        .then(() => {navigate('/posts')})
+            .then(() => {setRerender(!reren)})
+            .then(() => {navigate('/posts')})
+        } else {
+            alert("Thumbs Up and Thumbs Down must be positive integers and fields must be filled!")
+        }
     }
 
     return(
@@ -32,15 +42,19 @@ function MakePost({ reren, setRerender, users, comms }) {
             <fieldset>
                 <legend>Make Post</legend>
                 <label htmlFor="Poster">Poster: </label>
-                <select className="txtbar" name="Poster" onChange={i => setPoster(i.target.value)}>
-                    <option value={null}>--Please pick a User--</option>
+                <select className="txtbar" name="Poster" defaultValue={users[0].UserID} onChange={i => setPoster(i.target.value)}>
                     <UserOptions users={users}/>
                 </select><br></br>
                 <label htmlFor="Title">Title: </label>
                 <input type='text' value={title} onChange={i => setTitle(i.target.value)} name="Title" className="txtbar"/><br></br>
+                <label htmlFor="Thumbs Up">Thumbs Up: </label>
+                <input type='number' name="Thumbs Up" value={thbUp} onChange={i => {setThbUp(i.target.value)}} className="txtbar"/><br></br>
+                <label htmlFor="Thumbs Down">Thumbs Down: </label>
+                <input type='number' name="Thumbs Down" value={thbDwn} onChange={i => {setThbDwn(i.target.value)}} className="txtbar"/><br></br>
+                <label htmlFor="Date Posted">Date Posted: </label>
+                <input type='datetime-local' name="Date Posted" value={date} onChange={i => {setDate(i.target.value)}} className="txtbar"/><br></br>
                 <label htmlFor="Community">Community: </label>
-                <select className="txtbar" name="Community" onChange={i => setComm(i.target.value)}>
-                    <option value={null}>--Please pick a Community--</option>
+                <select className="txtbar" name="Community" defaultValue={comms[0].CommunityID} onChange={i => setComm(i.target.value)}>
                     <CommOptions comms={comms}/>
                 </select><br></br>
                 <button onClick={() => createPost()}>Post</button>

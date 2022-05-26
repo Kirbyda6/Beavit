@@ -1,9 +1,10 @@
 import React from "react";
-import { useNavigate ,Link } from "react-router-dom";
-import { MdOutlineEditNote, MdDeleteForever } from "react-icons/md";
+import { useNavigate, Link } from "react-router-dom";
+import CommUsrComp from "../components/commUsrComp";
 
-function CommunityUsers() {
+function CommunityUsers({ commUsrs, reren, setRerender, usrs, comms }) {
     const navigate = useNavigate()
+
     return(
         <div>
             <span className="nav-bar">
@@ -18,55 +19,7 @@ function CommunityUsers() {
                 <table>
                     <thead><tr><th>User</th><th>Community</th><th>Moderator Status</th></tr></thead>
                     <tbody>
-                        <tr>
-                            <td>Billy</td>
-                            <td>OSU</td>
-                            <td>0</td>
-                            <td><MdOutlineEditNote id="icon"/></td>
-                            <td><MdDeleteForever id="icon"/></td>
-                        </tr>
-                        <tr>
-                            <td>Billy</td>
-                            <td>Pets</td>
-                            <td>1</td>
-                            <td><MdOutlineEditNote id="icon"/></td>
-                            <td><MdDeleteForever id="icon"/></td>
-                        </tr>
-                        <tr>
-                            <td>Bob</td>
-                            <td>OSU</td>
-                            <td>0</td>
-                            <td><MdOutlineEditNote id="icon"/></td>
-                            <td><MdDeleteForever id="icon"/></td>
-                        </tr>
-                        <tr>
-                            <td>Bob</td>
-                            <td>Pets</td>
-                            <td>1</td>
-                            <td><MdOutlineEditNote id="icon"/></td>
-                            <td><MdDeleteForever id="icon"/></td>
-                        </tr>
-                        <tr>
-                            <td>Bob</td>
-                            <td>Movies</td>
-                            <td>0</td>
-                            <td><MdOutlineEditNote id="icon"/></td>
-                            <td><MdDeleteForever id="icon"/></td>
-                        </tr>
-                        <tr>
-                            <td>Jill</td>
-                            <td>OSU</td>
-                            <td>0</td>
-                            <td><MdOutlineEditNote id="icon"/></td>
-                            <td><MdDeleteForever id="icon"/></td>
-                        </tr>
-                        <tr>
-                            <td>Jane</td>
-                            <td>Movies</td>
-                            <td>0</td>
-                            <td><MdOutlineEditNote id="icon"/></td>
-                            <td><MdDeleteForever id="icon"/></td>
-                        </tr>
+                        <CommUsrComp commUsrs={commUsrs} reren={reren} setRerender={setRerender} usrs={usrs} comms={comms}/>
                     </tbody>
                 </table>
                 <button onClick={() => navigate('/addComUsr')}>Add A User To A Community</button>

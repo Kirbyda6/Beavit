@@ -13,6 +13,16 @@ function Homepage() {
                 <Link to='/communities'> Communities </Link>
                 <Link to='/communityUsers'> Community Users </Link>
             </span>
+            <p>
+                Beavit is a social media web application that supports 40 million active users to help
+                them connect to communities of other users that share the same interests. A user can
+                have many different interests and may not know anyone that shares the same interests
+                in their day-to-day life. This is why a user may want to join one of the 100,000 Beavit
+                Communities or create one themselves. Users can make posts, ‘ThumbsUp’ or
+                ‘ThumbsDown’ a post/comment, as well as comment on posts/comments within that
+                post. A detailed and well structured database is crucial to the success of each of these
+                actions.
+            </p>
         </div>
     );
 }

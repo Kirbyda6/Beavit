@@ -51,6 +51,7 @@ function App() {
     const [posts, setPosts] = useState([]);
     const [curPost, setCurPost] = useState([]);
     const [comments, setComments] = useState([]);
+    const [curComnt, setCurComnt] = useState([]);
     const [comms, setComms] = useState([]);
     const [commsUsrs, setCommsUsrs] = useState([]);
 
@@ -115,13 +116,13 @@ function App() {
                     <Route path="/makePost" element={<MakePost reren={rerender} setRerender={setRerender} users={users} comms={comms} />} />
                     <Route path="/users" element={<Users />} />
                     <Route path="/addUser" element={<AddUser />} />
-                    <Route path="/communities" element={<Communities />} />
-                    <Route path="/addComm" element={<AddComm />} />
-                    <Route path="/comments" element={<Comments />} />
-                    <Route path="/newComment" element={<MakeComment />} />
-                    <Route path="/editComment" element={<EditComment />} />
-                    <Route path="/communityUsers" element={<CommunityUsers />} />
-                    <Route path="/addComUsr" element={<AddCommUsr />} />
+                    <Route path="/communities" element={<Communities comms={comms} reren={rerender} setRerender={setRerender} />} />
+                    <Route path="/addComm" element={<AddComm reren={rerender} setRerender={setRerender} />} />
+                    <Route path="/comments" element={<Comments comments={comments} setCurComnt={setCurComnt} reren={rerender} setRerender={setRerender} />} />
+                    <Route path="/newComment" element={<MakeComment comments={comments} posts={posts} users={users} reren={rerender} setRerender={setRerender} />} />
+                    <Route path="/editComment" element={<EditComment curComnt={curComnt} reren={rerender} setRerender={setRerender} posts={posts} cmts={comments} users={users} />} />
+                    <Route path="/communityUsers" element={<CommunityUsers commUsrs={commsUsrs} reren={rerender} setRerender={setRerender} usrs={users} comms={comms} />} />
+                    <Route path="/addComUsr" element={<AddCommUsr reren={rerender} setRerender={setRerender} users={users} comms={comms} />} />
                 </Routes>
             </Router>
         </div>
