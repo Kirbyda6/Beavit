@@ -5,10 +5,9 @@ import UserComponentSearch from "../components/UserCompSearch";
 import Axios from "axios";
 
 //function Users({users, searchUser, setSearchUser, reren, setRerender})
-function Users({users, reren, setRerender}) {
+function Users({users, reren, setRerender, searchUser, setSearchUser}) {
     const navigate = useNavigate();
     const [searchUsername, setSearchUsername] = useState('');
-    const [searchUser, setSearchUser] = useState([]);
 
     // const loadUsers = () => {
     //     Axios.get("http://flip2.engr.oregonstate.edu:8056/users").then((result) => {
@@ -28,18 +27,22 @@ function Users({users, reren, setRerender}) {
 
     const searchResult = async (searchUsername) => {
         console.log(searchUsername)
-        const results = await fetch(`http://flip3.engr.oregonstate.edu:8057/users/${searchUsername}`, {
+        let results = await fetch(`http://flip3.engr.oregonstate.edu:8057/users/${searchUsername}`, {
             method: "GET",
             headers: {
                 'Content-Type': 'application/json'
             },
         })
-        .then(setSearchUser(results))
-        //.then(results => {console.log(results.json())})
-        //.then(setSearchUser)
-        .then(console.log(searchUser))
-        .then(() => {navigate('/userSearchResults')})
+        .then((res) => {
+            return res.json()
+        })
+        .then((searchData) => {
+            console.log(searchData)
+            setSearchUser(searchData)
+        })
+        .then(navigate('/userSearchResults'))
     }
+    
     
     return(
         <div>
@@ -73,8 +76,7 @@ function Users({users, reren, setRerender}) {
                         </tr>
                     </thead>
                     <tbody>
-                        <UserComponent users={users} searchUser={searchUser} reren={reren} setRerender={setRerender}/> 
-                        {/* <UserComponent users={users} deleteUser={deleteUser} reren={reren} setRerender={setRerender}/> */}
+                        <UserComponent users={users} reren={reren} setRerender={setRerender}/> 
                     </tbody>
                 </table>
                 

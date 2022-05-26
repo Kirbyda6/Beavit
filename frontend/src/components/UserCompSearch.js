@@ -7,8 +7,7 @@ function UserComponentSearch ({ searchUser, reren, setRerender}) {
     if (searchUser.length === 0) {
         return(
             <tr>
-                <td>asdasd</td>
-                <td colSpan={6} style={{textAlign:"center"}}>Empty</td>
+                <td colSpan={6} style={{textAlign:"center"}}>No Users Found</td>
             </tr>
         );
     } else {

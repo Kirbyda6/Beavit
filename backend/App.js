@@ -32,8 +32,8 @@ app.get('/users', function(req, res) {
 app.get('/users/:username', function(req, res) {
     const username = req.params.username
     db.pool.query('SELECT * FROM Users WHERE Username = ?;', username, function (err, results, fields){
-        res.send(results);
-        // res.send(JSON.stringify(results));
+        //res.send(results);
+        res.send(JSON.stringify(results));
     });
 });
 

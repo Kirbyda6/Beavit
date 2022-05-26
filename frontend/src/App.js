@@ -50,7 +50,7 @@ function App() {
 
     const [rerender, setRerender] = useState(true);
     const [users, setUsers] = useState([]);
-    //const [searchUser, setSearchUser] = useState("");
+    const [searchUser, setSearchUser] = useState([]);
     const [posts, setPosts] = useState([]);
     const [curPost, setCurPost] = useState([]);
     const [comments, setComments] = useState([]);
@@ -121,8 +121,8 @@ function App() {
 
                     {/* <Route path="/users" element={<Users users={users} searchUser={searchUser} setSearchUser={setSearchUser} reren={rerender} setRerender={setRerender}/>} />
                     <Route path="/userSearchResults" element={<DisplaySearchUser searchUser={searchUser} reren={rerender} setRerender={setRerender}/>} /> */}
-                    <Route path="/users" element={<Users users={users} reren={rerender} setRerender={setRerender}/>} />
-                    <Route path="/userSearchResults" element={<DisplaySearchUser reren={rerender} setRerender={setRerender}/>} />
+                    <Route path="/users" element={<Users users={users} searchUser={searchUser} setSearchUser={setSearchUser} reren={rerender} setRerender={setRerender}/>} />
+                    <Route path="/userSearchResults" element={<DisplaySearchUser searchUser={searchUser} reren={rerender} setRerender={setRerender}/>} />
                     <Route path="/addUser" element={<AddUser reren={rerender} setRerender={setRerender}/>} />
                     <Route path="/communities" element={<Communities />} />
 
