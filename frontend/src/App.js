@@ -55,6 +55,7 @@ function App() {
     const [curPost, setCurPost] = useState([]);
     const [curComnt, setCurComnt] = useState([]);
     const [comments, setComments] = useState([]);
+    const [curComnt, setCurComnt] = useState([]);
     const [comms, setComms] = useState([]);
     const [commsUsrs, setCommsUsrs] = useState([]);
 
