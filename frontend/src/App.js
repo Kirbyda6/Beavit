@@ -53,12 +53,13 @@ function App() {
     const [searchUser, setSearchUser] = useState([]);
     const [posts, setPosts] = useState([]);
     const [curPost, setCurPost] = useState([]);
+    const [curComnt, setCurComnt] = useState([]);
     const [comments, setComments] = useState([]);
     const [comms, setComms] = useState([]);
     const [commsUsrs, setCommsUsrs] = useState([]);
 
     const loadTables = async () => {
-        await fetch('http://flip3.engr.oregonstate.edu:8057/users', {
+        await fetch('http://flip2.engr.oregonstate.edu:7352/users', {
             method: 'GET',
             headers: {
                 'Content-Type': 'application/json'
@@ -67,7 +68,7 @@ function App() {
         .then(res => {return res.json()})
         .then(result => {setUsers(result)})
 
-        await fetch('http://flip3.engr.oregonstate.edu:8057/posts', {
+        await fetch('http://flip2.engr.oregonstate.edu:7352/posts', {
             method: 'GET',
             headers: {
                 'Content-Type': 'application/json'
@@ -76,7 +77,7 @@ function App() {
         .then(res => {return res.json()})
         .then(result => {setPosts(result)})
 
-        await fetch('http://flip3.engr.oregonstate.edu:8057/comments', {
+        await fetch('http://flip2.engr.oregonstate.edu:7352/comments', {
             method: 'GET',
             headers: {
                 'Content-Type': 'application/json'
@@ -85,7 +86,7 @@ function App() {
         .then(res => {return res.json()})
         .then(result => {setComments(result)})
 
-        await fetch('http://flip3.engr.oregonstate.edu:8057/comms', {
+        await fetch('http://flip2.engr.oregonstate.edu:7352/comms', {
             method: 'GET',
             headers: {
                 'Content-Type': 'application/json'
@@ -94,7 +95,7 @@ function App() {
         .then(res => {return res.json()})
         .then(result => {setComms(result)})
 
-        await fetch('http://flip3.engr.oregonstate.edu:8057/commsUsrs', {
+        await fetch('http://flip2.engr.oregonstate.edu:7352/commsUsrs', {
             method: 'GET',
             headers: {
                 'Content-Type': 'application/json'
@@ -116,26 +117,16 @@ function App() {
                     <Route path="/posts" element={<Posts posts={posts} setCurPost={setCurPost} reren={rerender} setRerender={setRerender} />} />
                     <Route path="/editPost" element={<EditPost curPost={curPost} reren={rerender} setRerender={setRerender} comms={comms} users={users} />} />
                     <Route path="/makePost" element={<MakePost reren={rerender} setRerender={setRerender} users={users} comms={comms} />} />
-
-
-
-                    {/* <Route path="/users" element={<Users users={users} searchUser={searchUser} setSearchUser={setSearchUser} reren={rerender} setRerender={setRerender}/>} />
-                    <Route path="/userSearchResults" element={<DisplaySearchUser searchUser={searchUser} reren={rerender} setRerender={setRerender}/>} /> */}
                     <Route path="/users" element={<Users users={users} searchUser={searchUser} setSearchUser={setSearchUser} reren={rerender} setRerender={setRerender}/>} />
                     <Route path="/userSearchResults" element={<DisplaySearchUser searchUser={searchUser} reren={rerender} setRerender={setRerender}/>} />
                     <Route path="/addUser" element={<AddUser reren={rerender} setRerender={setRerender}/>} />
-                    <Route path="/communities" element={<Communities />} />
-
-
-
-
-
-                    <Route path="/addComm" element={<AddComm />} />
-                    <Route path="/comments" element={<Comments />} />
-                    <Route path="/newComment" element={<MakeComment />} />
-                    <Route path="/editComment" element={<EditComment />} />
-                    <Route path="/communityUsers" element={<CommunityUsers />} />
-                    <Route path="/addComUsr" element={<AddCommUsr />} />
+                    <Route path="/communities" element={<Communities comms={comms} reren={rerender} setRerender={setRerender} />} />
+                    <Route path="/addComm" element={<AddComm reren={rerender} setRerender={setRerender} />} />
+                    <Route path="/comments" element={<Comments comments={comments} setCurComnt={setCurComnt} reren={rerender} setRerender={setRerender} />} />
+                    <Route path="/newComment" element={<MakeComment comments={comments} posts={posts} users={users} reren={rerender} setRerender={setRerender} />} />
+                    <Route path="/editComment" element={<EditComment curComnt={curComnt} reren={rerender} setRerender={setRerender} posts={posts} cmts={comments} users={users} />} />
+                    <Route path="/communityUsers" element={<CommunityUsers commUsrs={commsUsrs} reren={rerender} setRerender={setRerender} usrs={users} comms={comms} />} />
+                    <Route path="/addComUsr" element={<AddCommUsr reren={rerender} setRerender={setRerender} users={users} comms={comms} />} />
                 </Routes>
             </Router>
         </div>

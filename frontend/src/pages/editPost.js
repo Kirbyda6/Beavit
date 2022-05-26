@@ -14,23 +14,27 @@ function EditPost({ curPost, reren, setRerender, comms, users }) {
     const [comm, setComm] = useState(curPost.Communities_CommunityID)
 
     const updatePost = async () => {
-        await fetch('http://flip3.engr.oregonstate.edu:8057/posts', {
-            method: "PUT",
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify({
-                postID: curPost.PostID,
-                poster: poster,
-                title: title,
-                ThumbsUpCt: thbUp,
-                ThumbsDwnCt: thbDwn,
-                date: date,
-                community: comm
+        if(thbUp >= 0 && thbDwn >= 0 && title != undefined) {
+            await fetch('http://flip2.engr.oregonstate.edu:7352/posts', {
+                method: "PUT",
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({
+                    postID: curPost.PostID,
+                    poster: poster,
+                    title: title,
+                    ThumbsUpCt: thbUp,
+                    ThumbsDwnCt: thbDwn,
+                    date: date,
+                    community: comm
+                })
             })
-        })
-        .then(() => {setRerender(!reren)})
-        .then(() => {navigate('/posts')})
+            .then(() => {setRerender(!reren)})
+            .then(() => {navigate('/posts')})
+        } else {
+            alert("Thumbs Up and Thumbs Down must be positive integers and fields must be filled!")
+        }
     }
 
     return(
@@ -38,33 +42,23 @@ function EditPost({ curPost, reren, setRerender, comms, users }) {
             <Link to='/posts'>Cancel</Link>
             <fieldset>
                 <legend>Edit Post</legend>
-
                 <label htmlFor="Poster">Poster: </label>
-                <select className="txtbar" name="Poster" onChange={i => setPoster(i.target.value)}>
-                    <option value={null}>--Please pick a User--</option>
+                <select className="txtbar" name="Poster" defaultValue={curPost.OP_UserID} onChange={i => setPoster(i.target.value)}>
                     <UserOptions users={users}/>
                 </select><br></br>
-
                 <label htmlFor="Title">Title: </label>
                 <input type='text' name="Title" value={title} onChange={i => {setTitle(i.target.value)}} className="txtbar"/><br></br>
-                
                 <label htmlFor="Thumbs Up">Thumbs Up: </label>
                 <input type='number' name="Thumbs Up" value={thbUp} onChange={i => {setThbUp(i.target.value)}} className="txtbar"/><br></br>
-                
                 <label htmlFor="Thumbs Down">Thumbs Down: </label>
                 <input type='number' name="Thumbs Down" value={thbDwn} onChange={i => {setThbDwn(i.target.value)}} className="txtbar"/><br></br>
-                
                 <label htmlFor="Date Posted">Date Posted: </label>
                 <input type='datetime-local' name="Date Posted" value={date} onChange={i => {setDate(i.target.value)}} className="txtbar"/><br></br>
-                
                 <label htmlFor="Community">Community: </label>
-                <select className="txtbar" name="Community" onChange={i => setComm(i.target.value)}>
-                    <option value={null}>--Please pick a Community--</option>
+                <select className="txtbar" name="Community" defaultValue={curPost.Communities_CommunityID} onChange={i => setComm(i.target.value)}>
                     <CommOptions comms={comms}/>
                 </select><br></br>
-                
                 <button onClick={() => {updatePost()}}>Save</button>
-                
             </fieldset>
         </div>
     );

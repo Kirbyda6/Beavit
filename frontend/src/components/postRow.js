@@ -4,9 +4,11 @@ import { MdOutlineEditNote, MdDeleteForever } from "react-icons/md";
 
 function PostRow ({ post, setCurPost, reren, setRerender }) {
     const navigate = useNavigate()
+    const date = new Date(post.DatePosted);
+    const opts = { year:"numeric", month:"short", day:"numeric"}
 
     const deletePost = async (id) => {
-        const url = `http://flip3.engr.oregonstate.edu:8057/posts/${id}`
+        const url = `http://flip2.engr.oregonstate.edu:7352/posts/${id}`
         await fetch(url, {
             method: 'DELETE',
             headers: {
@@ -17,8 +19,8 @@ function PostRow ({ post, setCurPost, reren, setRerender }) {
     }
 
     const editPost = async () => {
-        setCurPost(post)
-        navigate('/editPost')
+        setCurPost(post);
+        navigate('/editPost');
     }
 
     return(
@@ -27,7 +29,7 @@ function PostRow ({ post, setCurPost, reren, setRerender }) {
             <td>{post.PostTitle}</td>
             <td>{post.ThumbsUpCt}</td>
             <td>{post.ThumbsDwnCt}</td>
-            <td>{post.DatePosted}</td>
+            <td>{date.toLocaleDateString('en-us', opts)}</td>
             <td>{post.Communities_CommunityID}</td>
             <td><MdOutlineEditNote id="icon" onClick={() => editPost()}/></td>
             <td><MdDeleteForever id="icon" onClick={() => deletePost(post.PostID)}/></td>

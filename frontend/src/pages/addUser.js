@@ -23,7 +23,7 @@ function AddUser({ reren, setRerender }) {
     //      // sends user back to the Users page after addition
     // };
     const createUser = async () => {
-        await fetch('http://flip3.engr.oregonstate.edu:8057/users', {
+        await fetch('http://flip2.engr.oregonstate.edu:7352/users', {
             method: "POST",
             headers: {
                 'Content-Type': 'application/json'

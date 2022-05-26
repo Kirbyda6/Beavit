@@ -27,7 +27,7 @@ function Users({users, reren, setRerender, searchUser, setSearchUser}) {
 
     const searchResult = async (searchUsername) => {
         if (searchUsername !=0) {
-            let results = await fetch(`http://flip3.engr.oregonstate.edu:8057/users/${searchUsername}`, {
+            let results = await fetch(`http://flip2.engr.oregonstate.edu:7352/users/${searchUsername}`, {
                 method: "GET",
                 headers: {
                     'Content-Type': 'application/json'

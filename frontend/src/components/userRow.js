@@ -8,7 +8,7 @@ function UserRow ({ user, reren, setRerender}) {
     const navigate = useNavigate()
     
     const deleteUser = async (username) => {
-        const url = `http://flip3.engr.oregonstate.edu:8057/users/${username}`
+        const url = `http://flip2.engr.oregonstate.edu:7352/users/${username}`
         await fetch(url, {
             method: 'DELETE',
             headers: {

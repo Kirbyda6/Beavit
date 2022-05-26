@@ -3,8 +3,7 @@ const app = express();
 const db = require('./db-connector');
 const cors = require('cors');
 const { query } = require('express');
-PORT = 8057;
-
+PORT = 7352;
 app.use(express.json())
 app.use(cors())
 
@@ -69,6 +68,21 @@ app.get('/commsUsrs', function(req, res) {
     });
 });
 
+app.get('/usrSearch/:id', function(req, res) {
+    query1 = `SELECT Username FROM Users WHERE UserID = ${req.params.id};`;
+
+    db.pool.query(query1, function (err, results, fields){
+        res.send(JSON.stringify(results));
+    });
+});
+
+app.get('/commSearch/:id', function(req, res) {
+    query1 = `SELECT CommunityName FROM Communities WHERE CommunityID = ${req.params.id};`;
+
+    db.pool.query(query1, function (err, results, fields){
+        res.send(JSON.stringify(results));
+    });
+});
 
 // Delete operations for Tables
 
@@ -80,44 +94,121 @@ app.delete('/posts/:id', function(req, res) {
     });
 });
 
-// app.delete("/delete/:username", (req, res) => {
+app.delete("/delete/:username", (req, res) => {
     
-//     const username = req.params.username
-        
-//     db.pool.query('DELETE FROM Users WHERE Username = ?;', username, (err, result) => {
-//         if(err) {
-//             console.log(err)
-//         } else {
-//             //res.send(JSON.stringify(results))--> NEEDED IF WE DON'T USE AXIOS
-//             res.send(result);
-//         }
-//     }
-//     );
-// });
-
-app.delete('/users/:username', function(req, res) {
     const username = req.params.username
         
-    db.pool.query('DELETE FROM Users WHERE Username = ?;', username, function (err, results, fields){
+    db.pool.query('DELETE FROM Users WHERE Username = ?', username, (err, result) => {
+        if(err) {
+            console.log(err)
+        } else {
+            //res.send(JSON.stringify(results))--> NEEDED IF WE DON'T USE AXIOS
+            res.send(result);
+        }
+    }
+    );
+});
+
+app.delete('/comments/:id', function(req, res) {
+    query1 = `DELETE FROM Comments WHERE CommentID = ${req.params.id};`;
+
+    db.pool.query(query1, function (err, results, fields){
         res.send('Deleted!');
     });
 });
 
+app.delete('/community/:id', function(req, res) {
+    query1 = `DELETE FROM Communities WHERE CommunityID = ${req.params.id};`;
+
+    db.pool.query(query1, function (err, results, fields){
+        res.send('Deleted!');
+    });
+});
+
+app.delete('/commUsrs/:usrID/:commID', function(req, res) {
+    query1 = `DELETE FROM Community_User_Base WHERE Communities_CommunityID = ${req.params.commID}
+            AND Users_UserID = ${req.params.usrID};`;
+
+    db.pool.query(query1, function (err, results, fields){
+        res.send('Deleted!');
+    });
+});
 
 // Create operations for Tables
 
 app.post('/posts', function(req, res) {
     query1 = `INSERT INTO Posts (OP_UserID, PostTitle, ThumbsUpCt, ThumbsDwnCt, DatePosted, Communities_CommunityID)
-    VALUES (${req.body.poster}, '${req.body.title}', 0, 0, '2021-11-7', ${req.body.community});`;
+    VALUES (
+        ${req.body.poster},
+        "${req.body.title}",
+        ${req.body.ThumbsUpCt},
+        ${req.body.ThumbsDwnCt},
+        '${req.body.date}',
+        ${req.body.community}
+        );`;
 
     db.pool.query(query1, function (err, results, fields){
         res.send(JSON.stringify(results));
     });
 });
 
-app.post('/users', function(req, res) {
-    query1 = `INSERT INTO Users (Username, JoinDate, ThumbsUpCt, ThumbsDwnCt)
-    VALUES ('${req.body.username}',  '${req.body.userJoinDate}', ${req.body.userThumbsUp}, ${req.body.userThumbsDown});`;
+app.post("/addUser", (req, res) => {
+    const username = req.body.username;
+    const userJoinDate = req.body.userJoinDate;
+    const userThumbsUp = req.body.userThumbsUp;
+    const userThumbsDown = req.body.userThumbsDown;
+
+    db.pool.query(
+        'INSERT INTO Users (Username, JoinDate, ThumbsUpCt, ThumbsDwnCt) VALUES (?,?,?,?);', 
+        [username, userJoinDate, userThumbsUp, userThumbsDown], (err, result) => {
+            if (err) {
+                console.log(err)
+            } else {
+                res.send("User added")
+            }
+        }
+        );
+});
+
+app.post('/comments', function(req, res) {
+    query1 = `INSERT INTO Comments (
+        ThumbsUpCt,
+        ThumbsDwnCt,
+        DateMade,
+        CommentStr,
+        Commenter_UserID,
+        Parent_Post_PostID,
+        Parent_Comment_CommentID
+        )
+    VALUES (
+        ${req.body.thmbsUp},
+        ${req.body.ThmbsDwn},
+        '${req.body.date}',
+        "${req.body.comment}",
+        ${req.body.user},
+        ${req.body.parentPost},
+        ${req.body.parentCmnt}
+        );`;
+
+    db.pool.query(query1, function (err, results, fields){
+        res.send(JSON.stringify(results));
+        if(err) {
+            console.log(err)
+        }
+    });
+});
+
+app.post('/community', function(req, res) {
+    query1 = `INSERT INTO Communities (CommunityName, MemberCt) VALUES ("${req.body.comm}", ${req.body.cnt})`;
+
+    db.pool.query(query1, function (err, results, fields){
+        res.send(JSON.stringify(results));
+    });
+});
+
+app.post('/usrComm', function(req, res) {
+    query1 = `INSERT INTO Community_User_Base (Users_UserID, Communities_CommunityID, ModeratorStatus)
+    VALUES (${req.body.user}, ${req.body.comm}, ${req.body.mod});`;
 
     db.pool.query(query1, function (err, results, fields){
         res.send(JSON.stringify(results));
@@ -125,26 +216,9 @@ app.post('/users', function(req, res) {
 });
 
 // Update operations for Tables
-// app.post("/addUser", (req, res) => {
-//     const username = req.body.username;
-//     const userJoinDate = req.body.userJoinDate;
-//     const userThumbsUp = req.body.userThumbsUp;
-//     const userThumbsDown = req.body.userThumbsDown;
-
-//     db.pool.query(
-//         'INSERT INTO Users (Username, JoinDate, ThumbsUpCt, ThumbsDwnCt) VALUES (?,?,?,?);', 
-//         [username, userJoinDate, userThumbsUp, userThumbsDown], (err, result) => {
-//             if (err) {
-//                 console.log(err)
-//             } else {
-//                 res.send("User added")
-//             }
-//         }
-//         );
-// });
 
 app.put('/posts', function(req, res) {
-    query1 = `UPDATE Posts SET OP_UserID = ${req.body.poster}, PostTitle = '${req.body.title}',
+    query1 = `UPDATE Posts SET OP_UserID = ${req.body.poster}, PostTitle = "${req.body.title}",
             ThumbsUpCt = ${req.body.ThumbsUpCt}, ThumbsDwnCt = ${req.body.ThumbsDwnCt},
             DatePosted = '${req.body.date}', Communities_CommunityID = ${req.body.community}
             WHERE PostID = ${req.body.postID};`;
@@ -152,7 +226,43 @@ app.put('/posts', function(req, res) {
     db.pool.query(query1, function (err, results, fields){
         res.send(JSON.stringify(results));
     });
-    
+});
+
+app.put('/comments', function(req, res) {
+    query1 = `UPDATE Comments SET 
+            ThumbsUpCt = ${req.body.thmbsUp},
+            ThumbsDwnCt = ${req.body.ThmbsDwn},
+            DateMade = '${req.body.date}',
+            CommentStr = "${req.body.comment}",
+            Commenter_UserID = ${req.body.user},
+            Parent_Post_PostID = ${req.body.parentPost},
+            Parent_Comment_CommentID = ${req.body.parentCmnt}
+            WHERE CommentID = ${req.body.cmtID};`;
+
+    db.pool.query(query1, function (err, results, fields){
+        res.send(JSON.stringify(results));
+        if(err) {
+            console.log(err)
+        }
+    });
+});
+
+app.put('/addMod/:usrID/:commID', function(req, res) {
+    query1 = `UPDATE Community_User_Base SET ModeratorStatus = 1 WHERE Communities_CommunityID = ${req.params.commID}
+    AND Users_UserID = ${req.params.usrID};`;
+
+    db.pool.query(query1, function (err, results, fields){
+        res.send(JSON.stringify(results));
+    });
+});
+
+app.put('/remMod/:usrID/:commID', function(req, res) {
+    query1 = `UPDATE Community_User_Base SET ModeratorStatus = 0 WHERE Communities_CommunityID = ${req.params.commID}
+    AND Users_UserID = ${req.params.usrID};`;
+
+    db.pool.query(query1, function (err, results, fields){
+        res.send(JSON.stringify(results));
+    });
 });
 
 app.listen(PORT, function() {
