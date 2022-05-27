@@ -8,7 +8,7 @@ function AddCommUsr({ reren, setRerender, users, comms }) {
 
     const [user, setUser] = useState(users[0].UserID)
     const [comm, setComm] = useState(comms[0].CommunityID)
-    const [mod, setMod] = useState(0)
+    const [mod, setMod] = useState(1)
 
     const subscribe = async () => {
         await fetch('http://flip2.engr.oregonstate.edu:7352/usrComm', {
@@ -43,8 +43,8 @@ function AddCommUsr({ reren, setRerender, users, comms }) {
                 
                 <label htmlFor='Mod'>Moderator Status: </label>
                 <select name='Mod' onChange={i => setMod(i.target.value)}>
-                    <option value={0}>Is a Moderator of this community</option>
-                    <option value={1}>Not a Moderator of this community</option>
+                    <option value={1}>Is a Moderator of this community</option>
+                    <option value={0}>Not a Moderator of this community</option>
                 </select><br></br>
 
                 <button onClick={() => subscribe()}>Add</button>

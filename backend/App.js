@@ -1,6 +1,6 @@
 const express = require('express');
 const app = express();
-const db = require('./db-connector');
+const db = require('./db_conn');
 const cors = require('cors');
 const { query } = require('express');
 PORT = 7352;
@@ -21,9 +21,12 @@ app.get('/', function(req, res) {
 // Read Operations for Tables
 
 app.get('/users', function(req, res) {
-    query1 = 'SELECT * FROM Users;';
+    // const query1 = ;
 
-    db.pool.query(query1, function (err, results, fields){
+    db.pool.query('SELECT * FROM Users;', function (err, results, fields){
+        if(err) {
+            console.log(err)
+        }
         res.send(JSON.stringify(results));
     });
 });
@@ -37,7 +40,7 @@ app.get('/users/:username', function(req, res) {
 });
 
 app.get('/posts', function(req, res) {
-    query1 = 'SELECT * FROM Posts;';
+    const query1 = 'SELECT * FROM Posts;';
 
     db.pool.query(query1, function (err, results, fields){
         res.send(JSON.stringify(results));
@@ -45,7 +48,7 @@ app.get('/posts', function(req, res) {
 });
 
 app.get('/comments', function(req, res) {
-    query1 = 'SELECT * FROM Comments;';
+    const query1 = 'SELECT * FROM Comments;';
 
     db.pool.query(query1, function (err, results, fields){
         res.send(JSON.stringify(results));
@@ -53,7 +56,7 @@ app.get('/comments', function(req, res) {
 });
 
 app.get('/comms', function(req, res) {
-    query1 = 'SELECT * FROM Communities;';
+    const query1 = 'SELECT * FROM Communities;';
 
     db.pool.query(query1, function (err, results, fields){
         res.send(JSON.stringify(results));
@@ -61,7 +64,7 @@ app.get('/comms', function(req, res) {
 });
 
 app.get('/commsUsrs', function(req, res) {
-    query1 = 'SELECT * FROM Community_User_Base;';
+    const query1 = 'SELECT * FROM Community_User_Base;';
 
     db.pool.query(query1, function (err, results, fields){
         res.send(JSON.stringify(results));
@@ -69,7 +72,7 @@ app.get('/commsUsrs', function(req, res) {
 });
 
 app.get('/usrSearch/:id', function(req, res) {
-    query1 = `SELECT Username FROM Users WHERE UserID = ${req.params.id};`;
+    const query1 = `SELECT Username FROM Users WHERE UserID = ${req.params.id};`;
 
     db.pool.query(query1, function (err, results, fields){
         res.send(JSON.stringify(results));
@@ -77,7 +80,7 @@ app.get('/usrSearch/:id', function(req, res) {
 });
 
 app.get('/commSearch/:id', function(req, res) {
-    query1 = `SELECT CommunityName FROM Communities WHERE CommunityID = ${req.params.id};`;
+    const query1 = `SELECT CommunityName FROM Communities WHERE CommunityID = ${req.params.id};`;
 
     db.pool.query(query1, function (err, results, fields){
         res.send(JSON.stringify(results));
@@ -87,7 +90,7 @@ app.get('/commSearch/:id', function(req, res) {
 // Delete operations for Tables
 
 app.delete('/posts/:id', function(req, res) {
-    query1 = `DELETE FROM Posts WHERE PostID = ${req.params.id};`;
+    const query1 = `DELETE FROM Posts WHERE PostID = ${req.params.id};`;
 
     db.pool.query(query1, function (err, results, fields){
         res.send('Deleted!');
@@ -110,7 +113,7 @@ app.delete("/delete/:username", (req, res) => {
 });
 
 app.delete('/comments/:id', function(req, res) {
-    query1 = `DELETE FROM Comments WHERE CommentID = ${req.params.id};`;
+    const query1 = `DELETE FROM Comments WHERE CommentID = ${req.params.id};`;
 
     db.pool.query(query1, function (err, results, fields){
         res.send('Deleted!');
@@ -118,7 +121,7 @@ app.delete('/comments/:id', function(req, res) {
 });
 
 app.delete('/community/:id', function(req, res) {
-    query1 = `DELETE FROM Communities WHERE CommunityID = ${req.params.id};`;
+    const query1 = `DELETE FROM Communities WHERE CommunityID = ${req.params.id};`;
 
     db.pool.query(query1, function (err, results, fields){
         res.send('Deleted!');
@@ -126,7 +129,7 @@ app.delete('/community/:id', function(req, res) {
 });
 
 app.delete('/commUsrs/:usrID/:commID', function(req, res) {
-    query1 = `DELETE FROM Community_User_Base WHERE Communities_CommunityID = ${req.params.commID}
+    const query1 = `DELETE FROM Community_User_Base WHERE Communities_CommunityID = ${req.params.commID}
             AND Users_UserID = ${req.params.usrID};`;
 
     db.pool.query(query1, function (err, results, fields){
@@ -137,7 +140,7 @@ app.delete('/commUsrs/:usrID/:commID', function(req, res) {
 // Create operations for Tables
 
 app.post('/posts', function(req, res) {
-    query1 = `INSERT INTO Posts (OP_UserID, PostTitle, ThumbsUpCt, ThumbsDwnCt, DatePosted, Communities_CommunityID)
+    const query1 = `INSERT INTO Posts (OP_UserID, PostTitle, ThumbsUpCt, ThumbsDwnCt, DatePosted, Communities_CommunityID)
     VALUES (
         ${req.body.poster},
         "${req.body.title}",
@@ -171,7 +174,7 @@ app.post("/addUser", (req, res) => {
 });
 
 app.post('/comments', function(req, res) {
-    query1 = `INSERT INTO Comments (
+    const query1 = `INSERT INTO Comments (
         ThumbsUpCt,
         ThumbsDwnCt,
         DateMade,
@@ -199,7 +202,7 @@ app.post('/comments', function(req, res) {
 });
 
 app.post('/community', function(req, res) {
-    query1 = `INSERT INTO Communities (CommunityName, MemberCt) VALUES ("${req.body.comm}", ${req.body.cnt})`;
+    const query1 = `INSERT INTO Communities (CommunityName, MemberCt) VALUES ("${req.body.comm}", ${req.body.cnt})`;
 
     db.pool.query(query1, function (err, results, fields){
         res.send(JSON.stringify(results));
@@ -207,7 +210,7 @@ app.post('/community', function(req, res) {
 });
 
 app.post('/usrComm', function(req, res) {
-    query1 = `INSERT INTO Community_User_Base (Users_UserID, Communities_CommunityID, ModeratorStatus)
+    const query1 = `INSERT INTO Community_User_Base (Users_UserID, Communities_CommunityID, ModeratorStatus)
     VALUES (${req.body.user}, ${req.body.comm}, ${req.body.mod});`;
 
     db.pool.query(query1, function (err, results, fields){
@@ -218,7 +221,7 @@ app.post('/usrComm', function(req, res) {
 // Update operations for Tables
 
 app.put('/posts', function(req, res) {
-    query1 = `UPDATE Posts SET OP_UserID = ${req.body.poster}, PostTitle = "${req.body.title}",
+    const query1 = `UPDATE Posts SET OP_UserID = ${req.body.poster}, PostTitle = "${req.body.title}",
             ThumbsUpCt = ${req.body.ThumbsUpCt}, ThumbsDwnCt = ${req.body.ThumbsDwnCt},
             DatePosted = '${req.body.date}', Communities_CommunityID = ${req.body.community}
             WHERE PostID = ${req.body.postID};`;
@@ -229,7 +232,7 @@ app.put('/posts', function(req, res) {
 });
 
 app.put('/comments', function(req, res) {
-    query1 = `UPDATE Comments SET 
+    const query1 = `UPDATE Comments SET 
             ThumbsUpCt = ${req.body.thmbsUp},
             ThumbsDwnCt = ${req.body.ThmbsDwn},
             DateMade = '${req.body.date}',
@@ -248,7 +251,7 @@ app.put('/comments', function(req, res) {
 });
 
 app.put('/addMod/:usrID/:commID', function(req, res) {
-    query1 = `UPDATE Community_User_Base SET ModeratorStatus = 1 WHERE Communities_CommunityID = ${req.params.commID}
+    const query1 = `UPDATE Community_User_Base SET ModeratorStatus = 1 WHERE Communities_CommunityID = ${req.params.commID}
     AND Users_UserID = ${req.params.usrID};`;
 
     db.pool.query(query1, function (err, results, fields){
@@ -257,7 +260,7 @@ app.put('/addMod/:usrID/:commID', function(req, res) {
 });
 
 app.put('/remMod/:usrID/:commID', function(req, res) {
-    query1 = `UPDATE Community_User_Base SET ModeratorStatus = 0 WHERE Communities_CommunityID = ${req.params.commID}
+    const query1 = `UPDATE Community_User_Base SET ModeratorStatus = 0 WHERE Communities_CommunityID = ${req.params.commID}
     AND Users_UserID = ${req.params.usrID};`;
 
     db.pool.query(query1, function (err, results, fields){
