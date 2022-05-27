@@ -2,8 +2,17 @@ import React from "react";
 import { Link, useNavigate } from "react-router-dom";
 import CommentComp from "../components/commentComp";
 
-function Comments({ comments, setCurComnt, reren, setRerender }) {
+function Comments({ comments, setCurComnt, reren, setRerender, posts, users }) {
     const navigate = useNavigate()
+
+    const makeCmnt = () => {
+        if(users.length != 0 && posts.length != 0) {
+            navigate('/newComment')
+        } else {
+            alert("There must be at least one user and one post to comment!")
+        }
+    }
+
     return(
         <div>
             <span className="nav-bar">
@@ -32,7 +41,7 @@ function Comments({ comments, setCurComnt, reren, setRerender }) {
                         <CommentComp comments={comments} setCurComnt={setCurComnt} reren={reren} setRerender={setRerender} />
                     </tbody>
                 </table>
-                <button onClick={() => navigate('/newComment')}>New Comment</button>
+                <button onClick={() => makeCmnt()}>New Comment</button>
             </div>
         </div>
     );

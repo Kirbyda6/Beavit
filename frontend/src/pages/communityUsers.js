@@ -5,6 +5,14 @@ import CommUsrComp from "../components/commUsrComp";
 function CommunityUsers({ commUsrs, reren, setRerender, usrs, comms }) {
     const navigate = useNavigate()
 
+    const makeUsrComm = () => {
+        if(usrs.length != 0 && comms.length != 0) {
+            navigate('/addComUsr')
+        } else {
+            alert("There must be at least one user and one community to add a community user!")
+        }
+    }
+
     return(
         <div>
             <span className="nav-bar">
@@ -22,7 +30,7 @@ function CommunityUsers({ commUsrs, reren, setRerender, usrs, comms }) {
                         <CommUsrComp commUsrs={commUsrs} reren={reren} setRerender={setRerender} usrs={usrs} comms={comms}/>
                     </tbody>
                 </table>
-                <button onClick={() => navigate('/addComUsr')}>Add A User To A Community</button>
+                <button onClick={() => makeUsrComm()}>Add A User To A Community</button>
             </div>
             
         </div>

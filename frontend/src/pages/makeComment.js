@@ -7,13 +7,13 @@ import CmntOptions from '../components/cmntOptions';
 function MakeComment({ comments, posts, users, reren, setRerender }) {
     const navigate = useNavigate()
 
-    const [usr, setUsr] = useState(comments[0].Commenter_UserID)
+    const [usr, setUsr] = useState(users[0].UserID)
     const [date, setDate] = useState()
     const [thmbUp, setThmbUp] = useState()
     const [thmbDwn, setThmbDwn] = useState()
     const [comment, setComment] = useState()
-    const [parentPost, setParentPost] = useState(comments[0].Parent_Post_PostID)
-    const [parentCmnt, setParentCmnt] = useState(comments[0].Parent_Comment_CommentID)
+    const [parentPost, setParentPost] = useState(posts[0].PostID)
+    const [parentCmnt, setParentCmnt] = useState(null)
 
     const makeCmnt = async () => {
         if(thmbUp >= 0 && thmbDwn >= 0 && comment != undefined) {
@@ -46,7 +46,7 @@ function MakeComment({ comments, posts, users, reren, setRerender }) {
                 <legend>Make Comment</legend>
 
                 <label htmlFor="Made By">Made By: </label>
-                <select name="Made By" className="txtbar" defaultValue={comments[0].Commenter_UserID} onChange={i => setUsr(i.target.value)}>
+                <select name="Made By" className="txtbar" onChange={i => setUsr(i.target.value)}>
                     <UserOptions users={users}/>
                 </select><br></br>
 
@@ -63,12 +63,12 @@ function MakeComment({ comments, posts, users, reren, setRerender }) {
                 <input type='text' name="Comment" className="txtbar" onChange={i => setComment(i.target.value)}/><br></br>
 
                 <label htmlFor="Post">Parent Post: </label>
-                <select name="Post" className="txtbar" defaultValue={comments[0].Parent_Post_PostID} onChange={i => setParentPost(i.target.value)}>
+                <select name="Post" className="txtbar" onChange={i => setParentPost(i.target.value)}>
                     <PostOptions posts={posts}/>
                 </select><br></br>
 
                 <label htmlFor="Reply">Replying to: </label>               
-                <select name="Reply" className="txtbar" defaultValue={comments[0].Parent_Comment_CommentID} onChange={i => setParentCmnt(i.target.value)}>
+                <select name="Reply" className="txtbar" defaultValue={null} onChange={i => setParentCmnt(i.target.value)}>
                     <option value={null}>NULL</option>
                     <CmntOptions cmts={comments}/>
                 </select><br></br>

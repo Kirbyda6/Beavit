@@ -114,7 +114,7 @@ function App() {
             <Router>
                 <Routes>
                     <Route path="/" element={<Homepage />} />
-                    <Route path="/posts" element={<Posts posts={posts} setCurPost={setCurPost} reren={rerender} setRerender={setRerender} />} />
+                    <Route path="/posts" element={<Posts posts={posts} setCurPost={setCurPost} reren={rerender} setRerender={setRerender} users={users} comms={comms} />} />
                     <Route path="/editPost" element={<EditPost curPost={curPost} reren={rerender} setRerender={setRerender} comms={comms} users={users} />} />
                     <Route path="/makePost" element={<MakePost reren={rerender} setRerender={setRerender} users={users} comms={comms} />} />
                     <Route path="/users" element={<Users users={users} searchUser={searchUser} setSearchUser={setSearchUser} reren={rerender} setRerender={setRerender}/>} />
@@ -122,7 +122,7 @@ function App() {
                     <Route path="/addUser" element={<AddUser reren={rerender} setRerender={setRerender}/>} />
                     <Route path="/communities" element={<Communities comms={comms} reren={rerender} setRerender={setRerender} />} />
                     <Route path="/addComm" element={<AddComm reren={rerender} setRerender={setRerender} />} />
-                    <Route path="/comments" element={<Comments comments={comments} setCurComnt={setCurComnt} reren={rerender} setRerender={setRerender} />} />
+                    <Route path="/comments" element={<Comments comments={comments} setCurComnt={setCurComnt} reren={rerender} setRerender={setRerender} posts={posts} users={users} />} />
                     <Route path="/newComment" element={<MakeComment comments={comments} posts={posts} users={users} reren={rerender} setRerender={setRerender} />} />
                     <Route path="/editComment" element={<EditComment curComnt={curComnt} reren={rerender} setRerender={setRerender} posts={posts} cmts={comments} users={users} />} />
                     <Route path="/communityUsers" element={<CommunityUsers commUsrs={commsUsrs} reren={rerender} setRerender={setRerender} usrs={users} comms={comms} />} />
