@@ -25,7 +25,12 @@ function UserRow ({ user, reren, setRerender}) {
             <td>{user.JoinDate}</td>
             <td>{user.ThumbsUpCt}</td>
             <td>{user.ThumbsDwnCt}</td>
-            <td><MdDeleteForever id="icon" onClick = {() => deleteUser(user.Username)}/></td>
+            <td style={{backgroundColor: "#030303"}}>
+                <div className="tooltip">
+                    <MdDeleteForever id="icon" onClick = {() => deleteUser(user.Username)}/>
+                    <span className="tooltext">Delete User</span>
+                </div>
+            </td>
         </tr>
     );
 }

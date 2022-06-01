@@ -20,13 +20,45 @@ p {
   cursor: pointer;
 }
 
-table, td {
-  border: 1px solid #303030;
+table{
   margin: 10px auto;
+  border-collapse: collapse;
+  /* box-shadow: -5px -5px 10px #303030; */
+}
+
+td {
+  border: 1px solid #303030;
+  border-left: none;
+  border-right: none;
+  padding: 0;
+  text-align: center;
+  vertical-align: middle;
+}
+
+tbody tr:nth-child(even) {
+  background-color: #0e0e0e;
+}
+
+th {
+  padding: 0 10px;
 }
 
 #icon:hover {
   cursor: pointer;
+}
+
+.tooltip {
+  border: 0;
+  border-radius: 3px;
+  background-color: #030303;
+  position: relative;
+  display: inline-block;
+  margin: 0px 1px 0px 1px;
+  transition: 0.5s;
+}
+
+.tooltip:hover {
+  background-color: #303030;
 }
 
 .tooltip .tooltext {
@@ -34,7 +66,7 @@ table, td {
   visibility: hidden;
   text-align: center;
   position: absolute;
-  right: 0%;
+  margin: 0 -150px;
   z-index: 1;
 }
 
@@ -133,4 +165,8 @@ select:hover{
   border: 1px solid #303030;
   border-radius: 3px;
   cursor: pointer;
+}
+
+#comments {
+  margin: 10px auto 10px 1%;
 }

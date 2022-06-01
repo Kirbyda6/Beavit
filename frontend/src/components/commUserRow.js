@@ -1,10 +1,7 @@
 import { React, useState } from "react";
-import { useNavigate } from "react-router-dom";
 import { MdDeleteForever, MdAddModerator, MdRemoveModerator } from "react-icons/md";
 
 function CommUsrRow ({ commUsr, reren, setRerender, usrs, comms }) {
-    const navigate = useNavigate()
-
     const [username, setUsername] = useState()
     const [commName, setCommName] = useState()
 
@@ -64,9 +61,20 @@ function CommUsrRow ({ commUsr, reren, setRerender, usrs, comms }) {
             <td>{username}</td>
             <td>{commName}</td>
             <td>{commUsr.ModeratorStatus}</td>
-            <td><MdDeleteForever id="icon" onClick={() => deleteCommUsr()}/></td>
-            <td><MdAddModerator id="icon" onClick={() => AddMod()}/></td>
-            <td><MdRemoveModerator id="icon" onClick={() => removeMod()}/></td>
+            <td style={{backgroundColor: "#030303"}}>
+                <div className="tooltip">
+                    <MdDeleteForever id="icon" onClick={() => deleteCommUsr()}/>
+                    <span className="tooltext">Delete Community User</span>
+                </div>
+                <div className="tooltip">
+                    <MdAddModerator id="icon" onClick={() => AddMod()}/>
+                    <span className="tooltext">Make Moderator</span>
+                </div>
+                <div className="tooltip">
+                    <MdRemoveModerator id="icon" onClick={() => removeMod()}/>
+                    <span className="tooltext">Take Away Moderator</span>
+                </div>
+            </td>
         </tr>
     );
 }

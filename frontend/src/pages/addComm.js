@@ -8,7 +8,7 @@ function AddComm({ reren, setRerender }) {
     const [cnt, setCnt] = useState()
 
     const createComm = async () => {
-        if(cnt >= 0 && comm != undefined) {
+        if(cnt >= 0 && comm != undefined && comm != '') {
             await fetch('http://flip2.engr.oregonstate.edu:7352/community', {
                 method: "POST",
                 headers: {
@@ -22,7 +22,9 @@ function AddComm({ reren, setRerender }) {
             .then(() => {setRerender(!reren)})
             .then(() => {navigate('/communities')})
         } else {
-            alert("Member Count can only be a positive integer and fields must be filled!")
+            alert("The fillowing requirements must be met:\n\n"
+            + "1) Community Name must be filled\n"
+            + "2) Member Count must be a positive integer\n")
         }        
     }
 

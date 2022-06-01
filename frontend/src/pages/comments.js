@@ -24,7 +24,7 @@ function Comments({ comments, setCurComnt, reren, setRerender, posts, users }) {
                 <Link to='/communityUsers'> Community Users </Link>
             </span>
             <div className="content">
-                <table>
+                <table id="comments">
                     <thead>
                         <tr>
                             <th>Comment ID</th>
@@ -38,7 +38,8 @@ function Comments({ comments, setCurComnt, reren, setRerender, posts, users }) {
                         </tr>
                     </thead>
                     <tbody>
-                        <CommentComp comments={comments} setCurComnt={setCurComnt} reren={reren} setRerender={setRerender} />
+                        <CommentComp comments={comments} setCurComnt={setCurComnt} reren={reren}
+                            setRerender={setRerender} users={users} posts={posts} />
                     </tbody>
                 </table>
                 <button onClick={() => makeCmnt()}>New Comment</button>

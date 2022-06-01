@@ -14,7 +14,16 @@ function CommRow ({ comm, reren, setRerender }) {
     }
 
     return(
-        <tr><td>{comm.CommunityName}</td><td>{comm.MemberCt}</td><td><MdDeleteForever id="icon" onClick={() => deleteComm(comm.CommunityID)}/></td></tr>
+        <tr>
+            <td>{comm.CommunityName}</td>
+            <td>{comm.MemberCt}</td>
+            <td style={{backgroundColor: "#030303"}}>
+                <div className="tooltip">
+                    <MdDeleteForever id="icon" onClick={() => deleteComm(comm.CommunityID)}/>
+                    <span className="tooltext">Delete Community</span>
+                </div>
+            </td>
+        </tr>
     );
 }
 

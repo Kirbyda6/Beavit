@@ -1,11 +1,32 @@
-import React from "react";
+import { React, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { MdOutlineEditNote, MdDeleteForever } from "react-icons/md";
 
-function PostRow ({ post, setCurPost, reren, setRerender }) {
+function PostRow ({ post, setCurPost, reren, setRerender, users }) {
     const navigate = useNavigate()
     const date = new Date(post.DatePosted);
     const opts = { year:"numeric", month:"short", day:"numeric"}
+    
+    const [username, setUsername] = useState()
+    const [commName, setCommName] = useState()
+
+    fetch(`http://flip2.engr.oregonstate.edu:7352/usrSearch/${post.OP_UserID}`, {
+        method: 'GET',
+        headers: {
+            'Content-Type': 'application/json'
+        }
+    })
+    .then(res => {return res.json()})
+    .then(result => {setUsername(result[0].Username)})
+
+    fetch(`http://flip2.engr.oregonstate.edu:7352/commSearch/${post.Communities_CommunityID}`, {
+        method: 'GET',
+        headers: {
+            'Content-Type': 'application/json'
+        }
+    })
+    .then(res => {return res.json()})
+    .then(result => {setCommName(result[0].CommunityName)})
 
     const deletePost = async (id) => {
         const url = `http://flip2.engr.oregonstate.edu:7352/posts/${id}`
@@ -25,14 +46,22 @@ function PostRow ({ post, setCurPost, reren, setRerender }) {
 
     return(
         <tr>
-            <td>{post.OP_UserID}</td>
+            <td>{username}</td>
             <td>{post.PostTitle}</td>
             <td>{post.ThumbsUpCt}</td>
             <td>{post.ThumbsDwnCt}</td>
             <td>{date.toLocaleDateString('en-us', opts)}</td>
-            <td>{post.Communities_CommunityID}</td>
-            <td><MdOutlineEditNote id="icon" onClick={() => editPost()}/></td>
-            <td><MdDeleteForever id="icon" onClick={() => deletePost(post.PostID)}/></td>
+            <td>{commName}</td>
+            <td style={{backgroundColor: "#030303"}}>
+                <div className="tooltip">
+                    <MdOutlineEditNote id="icon" onClick={() => editPost()}/>
+                    <span className="tooltext">Edit Post</span>
+                </div>
+                <div className="tooltip">
+                    <MdDeleteForever id="icon" onClick={() => deletePost(post.PostID)}/>
+                    <span className="tooltext">Delete Post</span>
+                </div>
+            </td>
         </tr>
     );
 }

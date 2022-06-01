@@ -87,6 +87,14 @@ app.get('/commSearch/:id', function(req, res) {
     });
 });
 
+app.get('/postSearch/:id', function(req, res) {
+    const query1 = `SELECT PostTitle FROM Posts WHERE PostID = ${req.params.id};`;
+
+    db.pool.query(query1, function (err, results, fields){
+        res.send(JSON.stringify(results));
+    });
+});
+
 // Delete operations for Tables
 
 app.delete('/posts/:id', function(req, res) {

@@ -38,7 +38,7 @@ function Posts({ posts, setCurPost, reren, setRerender, users, comms }) {
                         </tr>
                     </thead>
                     <tbody>
-                        <PostComponent posts={posts} setCurPost={setCurPost} reren={reren} setRerender={setRerender} />
+                        <PostComponent posts={posts} setCurPost={setCurPost} reren={reren} setRerender={setRerender} users={users} />
                     </tbody>
                 </table>
                 <button onClick={() => makePost()}>Make A Post</button>
