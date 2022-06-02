@@ -19,7 +19,6 @@ import EditComment from './pages/editComment';
 import MakePost from './pages/makePost';
 import AddCommUsr from './pages/AddUsrCom';
 import DisplaySearchUser from './pages/userSearchResults';
-//import Axios from 'axios';
 
 function App() {
 
@@ -35,7 +34,7 @@ function App() {
     const [commsUsrs, setCommsUsrs] = useState([]);
 
     const loadTables = async () => {
-        await fetch('http://flip2.engr.oregonstate.edu:8048/users', {
+        await fetch('http://flip2.engr.oregonstate.edu:7352/users', {
             method: 'GET',
             headers: {
                 'Content-Type': 'application/json'
@@ -44,7 +43,7 @@ function App() {
         .then(res => {return res.json()})
         .then(result => {setUsers(result)})
 
-        await fetch('http://flip2.engr.oregonstate.edu:8048/posts', {
+        await fetch('http://flip2.engr.oregonstate.edu:7352/posts', {
             method: 'GET',
             headers: {
                 'Content-Type': 'application/json'
@@ -53,7 +52,7 @@ function App() {
         .then(res => {return res.json()})
         .then(result => {setPosts(result)})
 
-        await fetch('http://flip2.engr.oregonstate.edu:8048/comments', {
+        await fetch('http://flip2.engr.oregonstate.edu:7352/comments', {
             method: 'GET',
             headers: {
                 'Content-Type': 'application/json'
@@ -62,7 +61,7 @@ function App() {
         .then(res => {return res.json()})
         .then(result => {setComments(result)})
 
-        await fetch('http://flip2.engr.oregonstate.edu:8048/comms', {
+        await fetch('http://flip2.engr.oregonstate.edu:7352/comms', {
             method: 'GET',
             headers: {
                 'Content-Type': 'application/json'
@@ -71,7 +70,7 @@ function App() {
         .then(res => {return res.json()})
         .then(result => {setComms(result)})
 
-        await fetch('http://flip2.engr.oregonstate.edu:8048/commsUsrs', {
+        await fetch('http://flip2.engr.oregonstate.edu:7352/commsUsrs', {
             method: 'GET',
             headers: {
                 'Content-Type': 'application/json'

@@ -19,7 +19,7 @@ function MakePost({ reren, setRerender, users, comms }) {
         let slct = new Date(date).valueOf()
 
         if(thbUp >= 0 && thbDwn >= 0 && (title != undefined && title != '') && slct > min_date && slct < max_date) {
-            await fetch('http://flip2.engr.oregonstate.edu:8048/posts', {
+            await fetch('http://flip2.engr.oregonstate.edu:7352/posts', {
                 method: "POST",
                 headers: {
                     'Content-Type': 'application/json'
@@ -39,7 +39,7 @@ function MakePost({ reren, setRerender, users, comms }) {
             alert("The fillowing requirements must be met:\n\n"
             + "1) Title must be filled\n"
             + "2) Thumbs Up and Thumbs Down must be positive integers\n"
-            + "3) Date must be between Jan. 1, 2015 and Jan. 1, 2100\n")
+            + "3) Date must be between Jan. 1, 2015 and Jan. 1, 2100 with a valid time\n")
         }
     }
 

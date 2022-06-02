@@ -1,9 +1,9 @@
 const express = require('express');
 const app = express();
-const db = require('./db_connector');
+const db = require('./db_conn');
 const cors = require('cors');
 const { query } = require('express');
-PORT = 8048;
+PORT = 7352;
 app.use(express.json())
 app.use(cors())
 

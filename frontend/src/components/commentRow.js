@@ -11,7 +11,7 @@ function CommentRow ({ comment, setCurComnt, reren, setRerender, users, posts })
     const [username, setUsername] = useState()
     const [post, setPost] = useState()
 
-    fetch(`http://flip2.engr.oregonstate.edu:8048/usrSearch/${comment.Commenter_UserID}`, {
+    fetch(`http://flip2.engr.oregonstate.edu:7352/usrSearch/${comment.Commenter_UserID}`, {
         method: 'GET',
         headers: {
             'Content-Type': 'application/json'
@@ -20,7 +20,7 @@ function CommentRow ({ comment, setCurComnt, reren, setRerender, users, posts })
     .then(res => {return res.json()})
     .then(result => {setUsername(result[0].Username)})
 
-    fetch(`http://flip2.engr.oregonstate.edu:8048/postSearch/${comment.Parent_Post_PostID}`, {
+    fetch(`http://flip2.engr.oregonstate.edu:7352/postSearch/${comment.Parent_Post_PostID}`, {
         method: 'GET',
         headers: {
             'Content-Type': 'application/json'
@@ -30,7 +30,7 @@ function CommentRow ({ comment, setCurComnt, reren, setRerender, users, posts })
     .then(result => {setPost(result[0].PostTitle)})
 
     const deleteComnt = async (id) => {
-        const url = `http://flip2.engr.oregonstate.edu:8048/comments/${id}`
+        const url = `http://flip2.engr.oregonstate.edu:7352/comments/${id}`
         await fetch(url, {
             method: 'DELETE',
             headers: {
@@ -47,7 +47,7 @@ function CommentRow ({ comment, setCurComnt, reren, setRerender, users, posts })
     }
 
     const setNull = async () => {
-        await fetch('http://flip2.engr.oregonstate.edu:8048/comments', {
+        await fetch('http://flip2.engr.oregonstate.edu:7352/comments', {
             method: "PUT",
             headers: {
                 'Content-Type': 'application/json'

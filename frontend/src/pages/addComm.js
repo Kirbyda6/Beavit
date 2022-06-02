@@ -9,7 +9,7 @@ function AddComm({ reren, setRerender }) {
 
     const createComm = async () => {
         if(cnt >= 0 && comm != undefined && comm != '') {
-            await fetch('http://flip2.engr.oregonstate.edu:8048/community', {
+            await fetch('http://flip2.engr.oregonstate.edu:7352/community', {
                 method: "POST",
                 headers: {
                     'Content-Type': 'application/json'

@@ -3,7 +3,7 @@ import { MdDeleteForever } from "react-icons/md";
 
 function CommRow ({ comm, reren, setRerender }) {
     const deleteComm = async (id) => {
-        const url = `http://flip2.engr.oregonstate.edu:8048/community/${id}`
+        const url = `http://flip2.engr.oregonstate.edu:7352/community/${id}`
         await fetch(url, {
             method: 'DELETE',
             headers: {

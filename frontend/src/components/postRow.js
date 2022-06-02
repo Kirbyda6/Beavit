@@ -10,7 +10,7 @@ function PostRow ({ post, setCurPost, reren, setRerender, users }) {
     const [username, setUsername] = useState()
     const [commName, setCommName] = useState()
 
-    fetch(`http://flip2.engr.oregonstate.edu:8048/usrSearch/${post.OP_UserID}`, {
+    fetch(`http://flip2.engr.oregonstate.edu:7352/usrSearch/${post.OP_UserID}`, {
         method: 'GET',
         headers: {
             'Content-Type': 'application/json'
@@ -19,7 +19,7 @@ function PostRow ({ post, setCurPost, reren, setRerender, users }) {
     .then(res => {return res.json()})
     .then(result => {setUsername(result[0].Username)})
 
-    fetch(`http://flip2.engr.oregonstate.edu:8048/commSearch/${post.Communities_CommunityID}`, {
+    fetch(`http://flip2.engr.oregonstate.edu:7352/commSearch/${post.Communities_CommunityID}`, {
         method: 'GET',
         headers: {
             'Content-Type': 'application/json'
@@ -29,7 +29,7 @@ function PostRow ({ post, setCurPost, reren, setRerender, users }) {
     .then(result => {setCommName(result[0].CommunityName)})
 
     const deletePost = async (id) => {
-        const url = `http://flip2.engr.oregonstate.edu:8048/posts/${id}`
+        const url = `http://flip2.engr.oregonstate.edu:7352/posts/${id}`
         await fetch(url, {
             method: 'DELETE',
             headers: {

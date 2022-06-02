@@ -21,7 +21,7 @@ function EditComment({ curComnt, reren, setRerender, posts, cmts, users }) {
         let slct = new Date(date).valueOf()
 
         if(thmbUp >= 0 && thmbDwn >= 0 && (comment != undefined && comment != '') && slct > min_date && slct < max_date) {
-            await fetch('http://flip2.engr.oregonstate.edu:8048/comments', {
+            await fetch('http://flip2.engr.oregonstate.edu:7352/comments', {
                 method: "PUT",
                 headers: {
                     'Content-Type': 'application/json'

@@ -21,7 +21,7 @@ function MakeComment({ comments, posts, users, reren, setRerender }) {
         let slct = new Date(date).valueOf()
 
         if(thmbUp >= 0 && thmbDwn >= 0 && (comment != undefined && comment != '') && slct > min_date && slct < max_date) {
-            await fetch('http://flip2.engr.oregonstate.edu:8048/comments', {
+            await fetch('http://flip2.engr.oregonstate.edu:7352/comments', {
                 method: "POST",
                 headers: {
                     'Content-Type': 'application/json'
@@ -42,7 +42,7 @@ function MakeComment({ comments, posts, users, reren, setRerender }) {
             alert("The fillowing requirements must be met:\n\n"
             + "1) Comment must be filled\n"
             + "2) Thumbs Up and Thumbs Down must be positive integers\n"
-            + "3) Date must be between Jan. 1, 2015 and Jan. 1, 2100\n")
+            + "3) Date must be between Jan. 1, 2015 and Jan. 1, 2100 with a valid time\n")
         }
     }
 

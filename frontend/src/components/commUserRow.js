@@ -5,7 +5,7 @@ function CommUsrRow ({ commUsr, reren, setRerender, usrs, comms }) {
     const [username, setUsername] = useState()
     const [commName, setCommName] = useState()
 
-    fetch(`http://flip2.engr.oregonstate.edu:8048/usrSearch/${commUsr.Users_UserID}`, {
+    fetch(`http://flip2.engr.oregonstate.edu:7352/usrSearch/${commUsr.Users_UserID}`, {
         method: 'GET',
         headers: {
             'Content-Type': 'application/json'
@@ -14,7 +14,7 @@ function CommUsrRow ({ commUsr, reren, setRerender, usrs, comms }) {
     .then(res => {return res.json()})
     .then(result => {setUsername(result[0].Username)})
 
-    fetch(`http://flip2.engr.oregonstate.edu:8048/commSearch/${commUsr.Communities_CommunityID}`, {
+    fetch(`http://flip2.engr.oregonstate.edu:7352/commSearch/${commUsr.Communities_CommunityID}`, {
         method: 'GET',
         headers: {
             'Content-Type': 'application/json'
@@ -24,7 +24,7 @@ function CommUsrRow ({ commUsr, reren, setRerender, usrs, comms }) {
     .then(result => {setCommName(result[0].CommunityName)})
 
     const deleteCommUsr = async () => {
-        const url = `http://flip2.engr.oregonstate.edu:8048/commUsrs/${commUsr.Users_UserID}/${commUsr.Communities_CommunityID}`
+        const url = `http://flip2.engr.oregonstate.edu:7352/commUsrs/${commUsr.Users_UserID}/${commUsr.Communities_CommunityID}`
         await fetch(url, {
             method: 'DELETE',
             headers: {
@@ -35,7 +35,7 @@ function CommUsrRow ({ commUsr, reren, setRerender, usrs, comms }) {
     }
 
     const AddMod = async () => {
-        const url = `http://flip2.engr.oregonstate.edu:8048/addMod/${commUsr.Users_UserID}/${commUsr.Communities_CommunityID}`
+        const url = `http://flip2.engr.oregonstate.edu:7352/addMod/${commUsr.Users_UserID}/${commUsr.Communities_CommunityID}`
         await fetch(url, {
             method: 'PUT',
             headers: {
@@ -46,7 +46,7 @@ function CommUsrRow ({ commUsr, reren, setRerender, usrs, comms }) {
     }
 
     const removeMod = async () => {
-        const url = `http://flip2.engr.oregonstate.edu:8048/remMod/${commUsr.Users_UserID}/${commUsr.Communities_CommunityID}`
+        const url = `http://flip2.engr.oregonstate.edu:7352/remMod/${commUsr.Users_UserID}/${commUsr.Communities_CommunityID}`
         await fetch(url, {
             method: 'PUT',
             headers: {

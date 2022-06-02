@@ -1,6 +1,5 @@
 import React from "react";
 import UserRow from "./userRow";
-import Axios from "axios";
 
 function UserComponent ({ users, reren, setRerender}) {
     if (users.length === 0) {
