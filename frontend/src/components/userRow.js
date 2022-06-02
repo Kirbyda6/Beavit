@@ -8,7 +8,7 @@ function UserRow ({ user, reren, setRerender}) {
     const navigate = useNavigate()
     
     const deleteUser = async (username) => {
-        const url = `http://flip2.engr.oregonstate.edu:7352/delete/${username}`
+        const url = `http://flip2.engr.oregonstate.edu:8048/delete/${username}`
         await fetch(url, {
             method: 'DELETE',
             headers: {
@@ -25,7 +25,12 @@ function UserRow ({ user, reren, setRerender}) {
             <td>{user.JoinDate}</td>
             <td>{user.ThumbsUpCt}</td>
             <td>{user.ThumbsDwnCt}</td>
-            <td><MdDeleteForever id="icon" onClick = {() => deleteUser(user.Username)}/></td>
+            <td style={{backgroundColor: "#030303"}}>
+                <div className="tooltip">
+                    <MdDeleteForever id="icon" onClick = {() => deleteUser(user.Username)}/>
+                    <span className="tooltext">Delete User</span>
+                </div>
+            </td>
         </tr>
     );
 }

@@ -23,20 +23,25 @@ function AddUser({ reren, setRerender }) {
     //      // sends user back to the Users page after addition
     // };
     const createUser = async () => {
-        await fetch('http://flip2.engr.oregonstate.edu:7352/addUser', {
-            method: "POST",
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify({
-                username: username,
-                userJoinDate: userJoinDate,
-                userThumbsUp: userThumbsUp,
-                userThumbsDown: userThumbsDown
+        if(username.length > 0 && userJoinDate != undefined) {
+            await fetch('http://flip2.engr.oregonstate.edu:8048/addUser', {
+                method: "POST",
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({
+                    username: username,
+                    userJoinDate: userJoinDate,
+                    userThumbsUp: userThumbsUp,
+                    userThumbsDown: userThumbsDown
+                })
             })
-        })
-        .then(() => {setRerender(!reren)})
-        .then(() => {navigate('/users')})
+            .then(() => {setRerender(!reren)})
+            .then(() => {navigate('/users')})
+        } else {
+            alert("Username and Join Date fields must be filled!")
+        }
+
     }
 
     return(

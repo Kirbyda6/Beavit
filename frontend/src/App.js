@@ -22,31 +22,7 @@ import DisplaySearchUser from './pages/userSearchResults';
 //import Axios from 'axios';
 
 function App() {
-    //LINES BELOW ARE LOADING USER DATA VIA FETCH AND/OR AXIOS. CURRENTLY LOADS DATA IN Users.JS INSTEAD
-    // const loadUsers = async () => {
-    //     await fetch('http://flip2.engr.oregonstate.edu:8056/users', {
-    //         method: 'GET',
-    //         headers: {
-    //             'Content-Type': 'application/json'
-    //         },
-    //         // mode: 'no-cors'
-    //     })
-    //     .then(res => {return res.json()})
-    //     .then(result => {setUsers(result)})
-    // }
 
-
-    //LINES BELOW ARE FOR IF WE WANT THIS DATA TO BE LOADED THROUGH THIS FILE INSTEAD OF Users.JS
-    // const loadUsers = () => {
-    //     Axios.get("http://flip2.engr.oregonstate.edu:8056/users").then((response) => {
-    //         (console.log(response))
-    //         setUsers(response.data)
-    //     })
-    // };
-
-    // useEffect(() => {
-    //     loadUsers();
-    // }, []);
 
     const [rerender, setRerender] = useState(true);
     const [users, setUsers] = useState([]);
@@ -59,7 +35,7 @@ function App() {
     const [commsUsrs, setCommsUsrs] = useState([]);
 
     const loadTables = async () => {
-        await fetch('http://flip2.engr.oregonstate.edu:7352/users', {
+        await fetch('http://flip2.engr.oregonstate.edu:8048/users', {
             method: 'GET',
             headers: {
                 'Content-Type': 'application/json'
@@ -68,7 +44,7 @@ function App() {
         .then(res => {return res.json()})
         .then(result => {setUsers(result)})
 
-        await fetch('http://flip2.engr.oregonstate.edu:7352/posts', {
+        await fetch('http://flip2.engr.oregonstate.edu:8048/posts', {
             method: 'GET',
             headers: {
                 'Content-Type': 'application/json'
@@ -77,7 +53,7 @@ function App() {
         .then(res => {return res.json()})
         .then(result => {setPosts(result)})
 
-        await fetch('http://flip2.engr.oregonstate.edu:7352/comments', {
+        await fetch('http://flip2.engr.oregonstate.edu:8048/comments', {
             method: 'GET',
             headers: {
                 'Content-Type': 'application/json'
@@ -86,7 +62,7 @@ function App() {
         .then(res => {return res.json()})
         .then(result => {setComments(result)})
 
-        await fetch('http://flip2.engr.oregonstate.edu:7352/comms', {
+        await fetch('http://flip2.engr.oregonstate.edu:8048/comms', {
             method: 'GET',
             headers: {
                 'Content-Type': 'application/json'
@@ -95,7 +71,7 @@ function App() {
         .then(res => {return res.json()})
         .then(result => {setComms(result)})
 
-        await fetch('http://flip2.engr.oregonstate.edu:7352/commsUsrs', {
+        await fetch('http://flip2.engr.oregonstate.edu:8048/commsUsrs', {
             method: 'GET',
             headers: {
                 'Content-Type': 'application/json'
@@ -114,7 +90,7 @@ function App() {
             <Router>
                 <Routes>
                     <Route path="/" element={<Homepage />} />
-                    <Route path="/posts" element={<Posts posts={posts} setCurPost={setCurPost} reren={rerender} setRerender={setRerender} />} />
+                    <Route path="/posts" element={<Posts posts={posts} setCurPost={setCurPost} reren={rerender} setRerender={setRerender} users={users} comms={comms} />} />
                     <Route path="/editPost" element={<EditPost curPost={curPost} reren={rerender} setRerender={setRerender} comms={comms} users={users} />} />
                     <Route path="/makePost" element={<MakePost reren={rerender} setRerender={setRerender} users={users} comms={comms} />} />
                     <Route path="/users" element={<Users users={users} searchUser={searchUser} setSearchUser={setSearchUser} reren={rerender} setRerender={setRerender}/>} />
@@ -122,7 +98,7 @@ function App() {
                     <Route path="/addUser" element={<AddUser reren={rerender} setRerender={setRerender}/>} />
                     <Route path="/communities" element={<Communities comms={comms} reren={rerender} setRerender={setRerender} />} />
                     <Route path="/addComm" element={<AddComm reren={rerender} setRerender={setRerender} />} />
-                    <Route path="/comments" element={<Comments comments={comments} setCurComnt={setCurComnt} reren={rerender} setRerender={setRerender} />} />
+                    <Route path="/comments" element={<Comments comments={comments} setCurComnt={setCurComnt} reren={rerender} setRerender={setRerender} posts={posts} users={users} />} />
                     <Route path="/newComment" element={<MakeComment comments={comments} posts={posts} users={users} reren={rerender} setRerender={setRerender} />} />
                     <Route path="/editComment" element={<EditComment curComnt={curComnt} reren={rerender} setRerender={setRerender} posts={posts} cmts={comments} users={users} />} />
                     <Route path="/communityUsers" element={<CommunityUsers commUsrs={commsUsrs} reren={rerender} setRerender={setRerender} usrs={users} comms={comms} />} />

@@ -3,7 +3,7 @@ import { MdDeleteForever } from "react-icons/md";
 
 function CommRow ({ comm, reren, setRerender }) {
     const deleteComm = async (id) => {
-        const url = `http://flip2.engr.oregonstate.edu:7352/community/${id}`
+        const url = `http://flip2.engr.oregonstate.edu:8048/community/${id}`
         await fetch(url, {
             method: 'DELETE',
             headers: {
@@ -14,7 +14,16 @@ function CommRow ({ comm, reren, setRerender }) {
     }
 
     return(
-        <tr><td>{comm.CommunityName}</td><td>{comm.MemberCt}</td><td><MdDeleteForever id="icon" onClick={() => deleteComm(comm.CommunityID)}/></td></tr>
+        <tr>
+            <td>{comm.CommunityName}</td>
+            <td>{comm.MemberCt}</td>
+            <td style={{backgroundColor: "#030303"}}>
+                <div className="tooltip">
+                    <MdDeleteForever id="icon" onClick={() => deleteComm(comm.CommunityID)}/>
+                    <span className="tooltext">Delete Community</span>
+                </div>
+            </td>
+        </tr>
     );
 }
 

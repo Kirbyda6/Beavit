@@ -15,7 +15,6 @@ function UserComponent ({ users, reren, setRerender}) {
             user={x}
             reren={reren} 
             setRerender={setRerender}
-            // deleteUser={deleteUser}
             key={i}
             />)
         );

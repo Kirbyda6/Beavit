@@ -3,8 +3,17 @@ import { Link } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 import PostComponent from "../components/postComp";
 
-function Posts({ posts, setCurPost, reren, setRerender }) {
+function Posts({ posts, setCurPost, reren, setRerender, users, comms }) {
     const navigate = useNavigate()
+
+    const makePost = () => {
+        if(users.length != 0 && comms.length != 0) {
+            navigate('/makePost')
+        } else {
+            alert("There must be at least one user and one community to post!")
+        }
+    }
+
     return(
         <div>
             <span className="nav-bar">
@@ -29,10 +38,10 @@ function Posts({ posts, setCurPost, reren, setRerender }) {
                         </tr>
                     </thead>
                     <tbody>
-                        <PostComponent posts={posts} setCurPost={setCurPost} reren={reren} setRerender={setRerender} />
+                        <PostComponent posts={posts} setCurPost={setCurPost} reren={reren} setRerender={setRerender} users={users} />
                     </tbody>
                 </table>
-                <button onClick={() => navigate('/makePost')}>Make A Post</button>
+                <button onClick={() => makePost()}>Make A Post</button>
             </div>
         </div>
     );

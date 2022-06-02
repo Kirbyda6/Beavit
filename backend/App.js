@@ -1,9 +1,9 @@
 const express = require('express');
 const app = express();
-const db = require('./db_conn');
+const db = require('./db_connector');
 const cors = require('cors');
 const { query } = require('express');
-PORT = 7352;
+PORT = 8048;
 app.use(express.json())
 app.use(cors())
 
@@ -87,6 +87,14 @@ app.get('/commSearch/:id', function(req, res) {
     });
 });
 
+app.get('/postSearch/:id', function(req, res) {
+    const query1 = `SELECT PostTitle FROM Posts WHERE PostID = ${req.params.id};`;
+
+    db.pool.query(query1, function (err, results, fields){
+        res.send(JSON.stringify(results));
+    });
+});
+
 // Delete operations for Tables
 
 app.delete('/posts/:id', function(req, res) {
@@ -105,7 +113,6 @@ app.delete("/delete/:username", (req, res) => {
         if(err) {
             console.log(err)
         } else {
-            //res.send(JSON.stringify(results))--> NEEDED IF WE DON'T USE AXIOS
             res.send(result);
         }
     }

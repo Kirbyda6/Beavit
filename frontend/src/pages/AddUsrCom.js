@@ -11,7 +11,7 @@ function AddCommUsr({ reren, setRerender, users, comms }) {
     const [mod, setMod] = useState(1)
 
     const subscribe = async () => {
-        await fetch('http://flip2.engr.oregonstate.edu:7352/usrComm', {
+        await fetch('http://flip2.engr.oregonstate.edu:8048/usrComm', {
             method: "POST",
             headers: {
                 'Content-Type': 'application/json'

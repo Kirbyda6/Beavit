@@ -1,7 +1,7 @@
 import React from "react";
 import PostRow from "./postRow";
 
-function PostComponent ({ posts, setCurPost, reren, setRerender }) {
+function PostComponent ({ posts, setCurPost, reren, setRerender, users }) {
     if (posts.length === 0) {
         return(
             <tr>
@@ -10,7 +10,7 @@ function PostComponent ({ posts, setCurPost, reren, setRerender }) {
         );
     } else {
         return(
-            posts.map((x, i) => <PostRow post={x} setCurPost={setCurPost}  reren={reren} setRerender={setRerender} key={i}/>)
+            posts.map((x, i) => <PostRow post={x} setCurPost={setCurPost}  reren={reren} setRerender={setRerender} users={users} key={i}/>)
         );
     }
 }
