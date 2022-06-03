@@ -43,6 +43,7 @@ function MakeComment({ comments, posts, users, reren, setRerender }) {
             + "1) Comment must be filled\n"
             + "2) Thumbs Up and Thumbs Down must be positive integers\n"
             + "3) Date must be between Jan. 1, 2015 and Jan. 1, 2100 with a valid time\n")
+
         }
     }
 
