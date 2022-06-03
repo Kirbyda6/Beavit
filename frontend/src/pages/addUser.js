@@ -1,42 +1,41 @@
 import {React, useState} from 'react';
 import { useNavigate, Link } from "react-router-dom";
-import Axios from "axios";
+
 
 function AddUser({ reren, setRerender }) {
     const navigate = useNavigate();
+    
 
     const [username, setUsername] = useState("");
     const [userJoinDate, setUserJoinDate] = useState("");
     const [userThumbsUp, setUserThumbsUp] = useState(0);
     const [userThumbsDown, setUserThumbsDown] = useState(0);
 
-    // const addUser = () => {
-    //     Axios.post("http://flip2.engr.oregonstate.edu:8056/addUser", { //using axios to send info in object from React to backend
-    //         username: username,
-    //         userJoinDate: userJoinDate,
-    //         userThumbsUp: userThumbsUp,
-    //         userThumbsDown: userThumbsDown,
-    //     })
-    //     .then(() => {console.log ("User added")})
-    //     .then(() => {setRerender(!reren)})
-    //     .then(() => {navigate('/users')})
-    //      // sends user back to the Users page after addition
-    // };
     const createUser = async () => {
-        await fetch('http://flip2.engr.oregonstate.edu:7352/addUser', {
-            method: "POST",
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify({
-                username: username,
-                userJoinDate: userJoinDate,
-                userThumbsUp: userThumbsUp,
-                userThumbsDown: userThumbsDown
+        let min_date = new Date("2015-01-01").valueOf()
+        let max_date = new Date("2100-01-01").valueOf()
+        let userDate = new Date(userJoinDate).valueOf()
+        
+        if (username.length > 0 && userDate > min_date && userDate < max_date) {
+            await fetch('http://flip2.engr.oregonstate.edu:7352/addUser', {
+                method: "POST",
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({
+                    username: username,
+                    userJoinDate: userJoinDate,
+                    userThumbsUp: userThumbsUp,
+                    userThumbsDown: userThumbsDown
+                })
             })
-        })
-        .then(() => {setRerender(!reren)})
-        .then(() => {navigate('/users')})
+            .then(() => {setRerender(!reren)})
+            .then(() => {navigate('/users')})
+        } else if (username.length === 0){
+            alert("Username cannot be blank!")
+        } else if (userDate > min_date || userDate < max_date){
+            alert("Join Date must be between Jan. 1, 2015 and Jan. 1, 2100")
+        }
     }
 
     return(

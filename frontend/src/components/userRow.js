@@ -1,11 +1,13 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
 import { MdDeleteForever } from "react-icons/md";
-import Axios from "axios";
+
 
 
 function UserRow ({ user, reren, setRerender}) {
     const navigate = useNavigate()
+    const date = new Date(user.JoinDate);
+    const opts = { year:"numeric", month:"short", day:"numeric"}
     
     const deleteUser = async (username) => {
         const url = `http://flip2.engr.oregonstate.edu:7352/delete/${username}`
@@ -22,7 +24,7 @@ function UserRow ({ user, reren, setRerender}) {
     return(
         <tr>
             <td>{user.Username}</td>
-            <td>{user.JoinDate}</td>
+            <td>{date.toLocaleDateString('en-us', opts)}</td>
             <td>{user.ThumbsUpCt}</td>
             <td>{user.ThumbsDwnCt}</td>
             <td style={{backgroundColor: "#030303"}}>

@@ -1,6 +1,5 @@
 import React from "react";
 import UserRow from "./userRow";
-import Axios from "axios";
 
 function UserComponent ({ users, reren, setRerender}) {
     if (users.length === 0) {
@@ -15,7 +14,6 @@ function UserComponent ({ users, reren, setRerender}) {
             user={x}
             reren={reren} 
             setRerender={setRerender}
-            // deleteUser={deleteUser}
             key={i}
             />)
         );
