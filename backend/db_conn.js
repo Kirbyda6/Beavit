@@ -2,7 +2,7 @@ var mysql = require('mysql')
 const dotenv = require('dotenv')
 dotenv.config()
 
-// Create a 'connection pool' using the provided credentials
+// Code below was created with assistance from the Node Starter Guide found here: https://github.com/osu-cs340-ecampus/nodejs-starter-app
 var pool = mysql.createPool({
     connectionLimit : 10,
     host            : 'classmysql.engr.oregonstate.edu',
@@ -11,5 +11,4 @@ var pool = mysql.createPool({
     database        : 'cs340_kirbyda'
 })
 
-// Export it for use in our applicaiton
 module.exports.pool = pool;
