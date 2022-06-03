@@ -20,8 +20,9 @@ function Homepage() {
                 in their day-to-day life. This is why a user may want to join one of the 100,000 Beavit
                 Communities or create one themselves. Users can make posts, ‘ThumbsUp’ or
                 ‘ThumbsDown’ a post/comment, as well as comment on posts/comments within that
-                post. A detailed and well structured database is crucial to the success of each of these
-                actions.
+                post. A detailed and well-structured database is crucial to the success of each of these
+                actions and this project aims to implement one to track the activity that is occurring on 
+                Beavit without directly affecting the discussion board itself.
             </p>
         </div>
     );
